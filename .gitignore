@@ -1,0 +1,9 @@
+# IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.pubxml
+
+# Project locals
+/src/local/
