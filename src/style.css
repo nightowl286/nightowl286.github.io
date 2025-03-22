@@ -1,4 +1,19 @@
 html {
    background-color: #171717;
    color: #d7d7d7;
+   font-family: 'Noto Sans', sans-serif;
+}
+
+body {
+   max-width: 75ch;
+   margin: auto;
+}
+
+a, a:visited {
+   color: rgb(50, 150, 255);
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: underline;
 }
