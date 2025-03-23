@@ -22,6 +22,10 @@ a:hover:not(:has(img)) {
    text-decoration: underline;
 }
 
+footer {
+   margin-top: 3em;
+}
+
 footer > p {
    text-align: center;
    font-style: italic;
@@ -41,10 +45,6 @@ footer > p:hover {
    text-align: center;
 }
 
-.card > h2 {
-   text-decoration: underline;
-}
-
 article {
    margin: 20px 0;
 }
@@ -62,14 +62,17 @@ article {
    border-color: #d7d7d7;
 }
 
-article h3 {
+article > h3 {
    text-decoration: underline;
    text-align: center;
 }
 
+.region p {
+   text-align: justify;
+}
+
 .region p:has(+ p) {
    margin-bottom: 1em;
-   text-align: justify;
 }
 
 i {
@@ -78,4 +81,8 @@ i {
 
 i:hover {
    color: #d7d7d7;
+}
+
+section:has(+section) {
+   margin-bottom: 5em;
 }

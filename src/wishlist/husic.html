@@ -15,27 +15,133 @@
 
    <body>
       <main>
-         <div class="card">
-            <h2>Husic</h2>
-            <p>
-               A project to create the best offline music player,
-               initially inspired simply because shuffle algorithms suck.
-            </p>
-            <br>
-            <a href="../index.html" title="Return to the main page">Return to home page.</a>
-         </div>
-
+         <!-- Introduction -->
          <section>
-            <p>
-               Hello
-            </p>
+            <div class="card">
+               <h1>Husic</h1>
+               <p>
+                  A project to create the best offline music player,
+                  initially inspired simply because shuffle algorithms suck.
+               </p>
+               <br>
+               <a href="../index.html" title="Return to the main page">Return to home page.</a>
+            </div>
+
+            <div class="region">
+               <p>
+                  Music players are cool, there's a lot of different ways they can be made, they
+                  come with different <abbr title="Quality of life">QoL</abbr> features, some forget
+                  what the word <abbr title="Do not connect to the f**king internet">offline</abbr> means,
+                  some decide to stream music from god knows what questionable sources, and some are
+                  created by people who clearly have no artistic bone in their body <i>(not their fault though)</i>.
+               </p>
+            </div>
          </section>
 
+         <!-- Shuffle algorithms -->
          <section>
-            <p>
-               Hello
-            </p>
+            <div class="card">
+               <h2>Shuffle algorithms</h2>
+               <p><i>(Where do I even begin with this)</i></p>
+            </div>
+            <section class="region">
+               <p>
+                  Okay so shuffle algorithms suck when it comes to listening to music. There are a few
+                  common <i>(and terrible)</i> things that a lot of programs and websites do when it
+                  comes to shuffling, and they all suck in their own terrible ways.
+               </p>
+            </section>
+
+            <!-- Randomly picking the next song -->
+            <article>
+               <h3>Randomly picking the next song</h3>
+               <div class="region">
+                  <p>
+                     Why would anyone ever actually want this, like whyyyyyyy..... Just how lazy did the developers get?!
+                     Do they even listen to music themselves?! Or talk to anyone that listens to music regularly?!
+                     Why in the name of all that is sane would <em>anyone</em> want this?!
+                  </p>
+                  <p>
+                     There are SOOOOO many problems with this approach <i>(depending on just how lazy the <abbr title="developers">devs</abbr> are)</i>,
+                     especially when you're listening to shorter playlists. Imagine you get really unlucky, or the underlying
+                     <a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">
+                        <abbr title="Pseudorandom number generator">PRNG</abbr>
+                     </a>
+                     algorithm is a really awful one, and the universe just deems that you should be jumping back and forth
+                     between two or three songs.
+                  </p>
+                  <p>
+                     But has this actually happened to someone? God I hope not, but the fact that it <em>could</em> happen, is concerning.
+                     Especially when the probability isn't even that low.
+                  </p>
+                  <p>
+                     Imagine you have a playlist that only contains 5 songs, so when a song
+                     finishes plaything, there's a 25% probabilty for which song is chosen next
+                     <i>(if your random pick allows for picking the same song that has just played then please be ashamed of yourself even more)</i>,
+                     and so when that song finishes playing, there's a 25% probability
+                     that the song you just listened to beforehand is picked.
+                  </p>
+                  <p>
+                     What's worse is that getting a pattern like: A ➞ B ➞<sup>25%</sup> A ➞<sup>25%</sup> B is still a 6.25%
+                     probability, <i>(since the first two picks don't matter, it only matters that the next two picks are the same as the first two)</i>
+                     and with how much I listen to music this could be happening every day!!!
+                  </p>
+                  <p>
+                     Does anyone actually do this? Yes, Youtube is a prime offender
+                     <i>(among all the other problems Youtube has, but more on that later)</i>.
+                  </p>
+               </div>
+            </article>
+
+            <!-- Shuffling the upcoming songs -->
+            <article>
+               <h3>Shuffling the upcoming songs in the queue</h3>
+               <div class="region">
+                  <p>
+                     So usually, after the random pick algorithm has been thrown away because it sucks so much,
+                     the developers instead decide to shuffle the upcoming songs that are currently in the queue.
+                  </p>
+                  <p>
+                     This is already a huge improvement <i>(but it obviously has it's flaws, otherwise I wouldn't be talking about it here)</i>,
+                     and if your playlist / queue is long enough, then it <em>usually</em> wouldn't cause you any further problems.
+                  </p>
+                  <p>
+                     However, one big issue that I commonly see among the music players that do this, is that they don't re-shuffle
+                     the queue once it has finished, they simply go back to the start.
+                  </p>
+                  <p>
+                     Now this is a big problem because a lot of of music players also don't include a 're-shuffle' button, or
+                     when they do it's usually just a button that cycles between 'song shuffle', 'album shuffle' and 'no shuffle',
+                     so you end up having to click on it multiple times which is just annoying if you have to do it often.
+                  </p>
+                  <p>
+                     Another reason why not re-shuffling the queue is a problem, is that for a lot of people music is something that
+                     they have on in the background, they don't want to be switching back to the music player to re-shuffle the queue.
+                  </p>
+                  <p>
+                     Now you might say that if they only have the music on in the background, then they wouldn't care about re-shuffling,
+                     and that's fair, they might not, I'd say that it depends on the person, for me, if I have a short playlist on, then I
+                     will start noticing that it's repeating in the same order.
+                  </p>
+                  <p>
+                     Usually having a long playlist / queue avoids these problems. However, not always, because some people don't like
+                     turning off their computers, and so their music player just stays open, keeping the exact same queue and never resetting.
+                  </p>
+                  <p>
+                     Now obviously a person probably wouldn't remember the exact order their songs were played in on the previous day, but when
+                     you get the same order several days in a row, you will start noticing what song comes on after the current one.
+                     Try it out yourself by just listening to one playlist for a few days without ever shuffling it.
+                  </p>
+                  <p>
+                     This can also be problematic on phones, because sometimes the music playing <abbr title="applications">apps</abbr> will
+                     keep the queue even after you close them, since they are still running in the background.
+                  </p>
+               </div>
+            </article>
          </section>
       </main>
+      <footer>
+         <p>Disclaimer: I may be a programmer, but I am most certainly not a web developer.</p>
+      </footer>
    </body>
 </html>
