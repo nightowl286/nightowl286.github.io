@@ -15,56 +15,74 @@
 
    <body>
       <main>
-         <section id="about-me">
-            <h2>About me</h2>
-            <img class="profile-image" src="pfp.png" alt="Profile picture for Nightowl286" title="Profile picture for Nightowl286">
-            <p>Hello, I'm Nightowl, <i>(god I hate writing about me sections, always feels weird to introduce myself).</i></p>
-            <hr>
-            <div>
-               <p>
-                  I'm a programmer, and I quite like programming, although there were times in my life when I hated it.
-                  Overall I think I like creating things <i>(especially when it's something I think is cool)</i>,
-                  and exploring new and different ways to do things <i>(which tends to get some people worked up)</i>.
-               </p>
-               <p>
-                  I suffer from a sleep disorder/disability known as
-                  <a href="https://en.wikipedia.org/wiki/Non-24-hour_sleep%E2%80%93wake_disorder" title="Non-24 hour sleep wake disorder">N24</a>
-                  <i>(the symptoms of which make my username quite ironic)</i>, it makes life both extremely
-                  painful but also interesting, peaceful and beautiful <i>(so many sunsets and sunrises)</i>.
-               </p>
+         <section>
+            <div id="about-me" class="card">
+               <h2>About me</h2>
+               <img src="pfp.png" alt="Profile picture for Nightowl286" title="Profile picture for Nightowl286" style="grid-column: 1;">
+               <img src="pfp.png" alt="Profile picture for Nightowl286" title="Profile picture for Nightowl286" style="grid-column: 3; transform: scaleX(-1);">
+               <p>Hello, I'm Nightowl, <i>(god I hate writing about me sections, always feels weird to introduce myself).</i></p>
             </div>
+            <article>
+               <div class="region">
+                  <p>
+                     I'm a programmer, and I quite like programming, although there were times in my life when I hated it.
+                     Overall I think I like creating things <i>(especially when it's something I think is cool)</i>,
+                     and exploring new and different ways to do things <i>(which tends to get some people worked up)</i>.
+                  </p>
+                  <p>
+                     I think it's extremely fun to try out new ways of doing things, usually I find that most things
+                     end up not being as good as they could be, simply because they are being held back either by
+                     tech debt, no commercial use/support, or people simply not willing to change.
+                  </p>
+                  <p>
+                     I suffer from a sleep disorder/disability known as
+                     <a href="https://en.wikipedia.org/wiki/Non-24-hour_sleep%E2%80%93wake_disorder" title="Non-24 hour sleep wake disorder">N24</a>
+                     <i>(the symptoms of which make my username quite ironic)</i>, it makes life both extremely
+                     painful but also interesting, peaceful and beautiful <i>(so many sunsets and sunrises)</i>.
+                  </p>
+               </div>
+            </article>
          </section>
 
          <section>
-            <h2>Wishlist</h2>
-            <p>
-               The wishlist is a collection of programs that I really want to make,
-               primarily because I think it'll be really cool to have them.
-            </p>
+            <div class="card">
+               <h2>Wishlist</h2>
+               <p>
+                  The wishlist is a collection of programs that I really want to make,
+                  primarily because I think it'll be really cool to make them
+                  <i>(even if they do already exists)</i>.
+               </p>
+            </div>
 
             <article>
                <h3>Husic</h3>
-               <p>
-                  A project to create the best offline music player,
-                  initially inspired simply because shuffle algorithms suck.
-                  <a href="wishlist/husic.html">Read more.</a>
-               </p>
+               <div class="region">
+                  <p>
+                     A project to create the best offline music player,
+                     initially inspired simply because shuffle algorithms suck.
+                     <a href="wishlist/husic.html" title="Read more about the Husic project">Read more.</a>
+                  </p>
+               </div>
             </article>
             <article>
                <h3>Transform</h3>
-               <p>
-                  A project to create a new kind of an IDE, a 'transforming' IDE that is meant to adapt to workflows,
-                  instead of being general or specialised for single language.
-                  <a href="wishlist/transform.html">Read more.</a>
-               </p>
+               <div class="region">
+                  <p>
+                     A project to create a new kind of an IDE, a 'transforming' IDE that is meant to adapt to workflows,
+                     instead of being general or specialised for single language.
+                     <a href="wishlist/transform.html" title="Read more about the Transform project">Read more.</a>
+                  </p>
+               </div>
             </article>
             <article>
                <h3>Overseer</h3>
-               <p>
-                  A project to create a local project manager, CI/CD pipeline, basically anything I'd
-                  want to help me with managing my projects and automating the tedious tasks.
-                  <a href="wishlist/overseer.html">Read more.</a>
-               </p>
+               <div class="region">
+                  <p>
+                     A project to create a local project manager, CI/CD pipeline, basically anything I'd
+                     want to help me with managing my projects and automating the tedious tasks.
+                     <a href="wishlist/overseer.html" title="Read more about the Overseer project">Read more.</a>
+                  </p>
+               </div>
             </article>
          </section>
       </main>
