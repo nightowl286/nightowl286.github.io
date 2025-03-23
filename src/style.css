@@ -18,7 +18,7 @@ a, a:visited {
    text-decoration: none;
 }
 
-a:hover {
+a:hover:not(:has(img)) {
    text-decoration: underline;
 }
 
