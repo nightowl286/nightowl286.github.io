@@ -46,10 +46,11 @@ footer > p:hover {
 }
 
 article {
-   margin: 20px 30px;
+   margin: 20px 0;
 }
 
-article > .region {
+.region {
+   margin: 0 30px;
    padding: 3px 16px;
    border-color: #808080;
    border-style: solid;
@@ -57,7 +58,7 @@ article > .region {
    border-radius: 3px;
 }
 
-article > .region:hover {
+.region:hover {
    border-color: #d7d7d7;
 }
 
@@ -66,11 +67,15 @@ article h3 {
    text-align: center;
 }
 
-article p:has(+ p) {
+.region p:has(+ p) {
    margin-bottom: 1em;
    text-align: justify;
 }
 
-section:has(+section) {
-   margin-bottom: 5em;
+i {
+   color: #808080;
+}
+
+i:hover {
+   color: #d7d7d7;
 }
