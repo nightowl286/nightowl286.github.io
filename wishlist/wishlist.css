@@ -2,11 +2,11 @@ section {
    margin: 20px 0;
 }
 
-section > h3 {
-   text-align: center;
-   text-decoration: underline;
-}
 
 section:has(+ .card) {
    margin-bottom: 5em;
+}
+
+article > h3 {
+   text-decoration: none;
 }
