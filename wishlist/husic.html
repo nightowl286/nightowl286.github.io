@@ -198,6 +198,42 @@
                   </p>
                </div>
             </article>
+
+            <!-- Solution? -->
+            <article>
+               <h3>Solution?</h3>
+               <div class="region">
+                  <p>
+                     So what's the solution to this? Is there a perfect shuffling algorithm
+                     that creates the best music listening experience? And honestly, that I
+                     do not know yet.
+                  </p>
+                  <p>
+                     I have played around with some possible ideas, however at the present my
+                     limited maths skills are letting me down. <i>(I hate learning maths...)</i>
+                  </p>
+                  <p>
+                     However, my general opinion is that shuffling algorithms should properly
+                     keep track of the queue history, and use that information as heuristics
+                     in order to eliminate repeating patterns.
+                  </p>
+                  <p>
+                     In my opinion, that should at the very least include making sure that
+                     songs that were near each other are spread out, while making sure to account
+                     for the end and start of the queue.
+                  </p>
+                  <p>
+                     What I mean by this, is that if your current queue looked like <code>A, B, C, D</code>,
+                     then the next shuffled queue (which will play afterwards) should not be
+                     <code>C, A, D, B</code> for example. This is because when you combine them,
+                     and look at what the user will actually be hearing, you'll get
+                     <code>A, B, C, D, C, A, D, B</code> and from this you can clearly see the
+                     <code>C, D, C</code> pattern, which can occur if you don't make sure to
+                     check the end of the current queue, and the start of the new one.
+                  </p>
+               </div>
+            </article>
+
          </section>
       </main>
       <footer>
