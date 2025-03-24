@@ -31,9 +31,9 @@
    <body>
       <main>
          <!-- Introduction -->
-         <section>
+         <section id="introduction">
             <div class="card">
-               <h1>Husic</h1>
+               <h1><a href="#introduction">Husic</a></h1>
                <p>
                   A project to create the best offline music player,
                   initially inspired simply because shuffle algorithms suck.
@@ -51,6 +51,27 @@
                   created by people who clearly have no artistic bone in their body <i>(not their fault though)</i>.
                </p>
             </div>
+         </section>
+
+         <!-- Table of contents -->
+         <section id="toc">
+            <div class="card">
+               <h2><a href="#toc" title="Anchor link to this section.">Table of contents</a></h2>
+            </div>
+            <section class="region">
+               <ol>
+                  <li><a href="#introduction">Introduction</a></li>
+                  <li><a href="#toc">Table of contents</a></li>
+                  <li><a href="#shuffle">Shuffle algorithms</a></li>
+                  <ol>
+                     <li><a href="#shuffle-random">Randomly picking the next song</a></li>
+                     <li><a href="#shuffle-upcoming">Shuffling the upcoming songs in the queue</a></li>
+                     <li><a href="#shuffle-youtube">YouTube</a></li>
+                     <li><a href="#shuffle-solution">Solution?</a></li>
+                  </ol>
+                  <li><a href="#covers">Album & song covers</a></li>
+               </ol>
+            </section>
          </section>
 
          <!-- Shuffle algorithms -->
