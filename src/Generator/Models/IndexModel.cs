@@ -7,6 +7,7 @@ public sealed class IndexModel : IPageModel
 	#endregion
 
 	#region Properties
+	public string Id => "index";
 	public DateTime Date { get; }
 	public string Title => DefaultTitle;
 	public string Description { get; }

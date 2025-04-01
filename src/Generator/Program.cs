@@ -4,7 +4,8 @@ class Program
 {
 	#region Constants
 	private static readonly string ContentPath = Path.GetFullPath("../../../../../content");
-	private static readonly string BuildPath = Path.GetFullPath("../../../../../build");
+	public static readonly string BuildPath = Path.GetFullPath("../../../../../build");
+	public static readonly string InlineCssPath = Path.Combine(ContentPath, "inline.css");
 	#endregion
 
 	#region Functions
@@ -12,10 +13,36 @@ class Program
 	{
 		IndexModel indexModel = LoadIndexModel();
 		ProjectModel[] projectModels = LoadWishlistModels();
+
+		CleanDirectory(BuildPath);
+		BuildIndexPage(indexModel);
+
+		Array.ForEach(projectModels, BuildProjectPage);
 	}
 	#endregion
 
 	#region Helpers
+	private static void BuildIndexPage(IndexModel model)
+	{
+		model.PageTemplate(writer =>
+		{
+
+		});
+	}
+	private static void BuildProjectPage(ProjectModel model)
+	{
+		model.PageTemplate(writer =>
+		{
+
+		});
+	}
+	private static void CleanDirectory(string directory)
+	{
+		if (Directory.Exists(directory))
+			Directory.Delete(directory, true);
+
+		Directory.CreateDirectory(directory);
+	}
 	private static ProjectModel[] LoadWishlistModels()
 	{
 		string wishlistDirectory = Path.Combine(ContentPath, "wishlist");
@@ -24,8 +51,9 @@ class Program
 		ProjectModel[] projects = new ProjectModel[files.Length];
 		for (int i = 0; i < files.Length; i++)
 		{
+			string id = Path.GetFileNameWithoutExtension(files[i]);
 			XmlDocument xml = LoadXmlDocument(files[i]);
-			ProjectModel project = new(xml.GetRootElement());
+			ProjectModel project = new(id, xml.GetRootElement());
 
 			projects[i] = project;
 		}

@@ -3,6 +3,7 @@ namespace Generator.Models;
 public sealed class ProjectModel : IPageModel
 {
 	#region Properties
+	public string Id { get; }
 	public string Name { get; }
 	public DateTime Date { get; }
 	public string Title { get; }
@@ -10,8 +11,9 @@ public sealed class ProjectModel : IPageModel
 	#endregion
 
 	#region Constructors
-	public ProjectModel(XmlElement xml)
+	public ProjectModel(string id, XmlElement xml)
 	{
+		Id = id;
 		Name = xml.GetRequiredAttribute("name");
 		Date = xml.GetDateAttribute("date");
 		Title = IndexModel.DefaultTitle + $" - {Name} wishlist project";
