@@ -57,7 +57,20 @@ public static class IndentedTextWriterExtensions
 				writer.WriteLine();
 
 				using (writer.Footer())
-					writer.Tag("p", "Disclaimer: I may be a programmer, but I am most certainly not a web developer.");
+				{
+					using (writer.Paragraph())
+						writer.Text("Created on the ").Date("Created on", model.Published);
+
+					using (writer.Paragraph())
+						writer.Text("Updated on the ").Date("Updated on", model.Updated);
+
+					using (writer.Paragraph())
+						writer.Text("Built on the ").Date("Built on", DateTime.UtcNow);
+
+					using (writer.Br().Paragraph())
+						writer.Text("Disclaimer: I may be a programmer, but I am most certainly not a web developer.");
+
+				}
 			}
 		}
 
@@ -81,6 +94,15 @@ public static class IndentedTextWriterExtensions
 
 			writer.Write(text);
 		}
+	}
+	public static IndentedTextWriter Date(this IndentedTextWriter writer, string titleSuffix, DateTime date)
+	{
+		string attr = date.ToString("yyyy-MM-dd HH:mm:ss");
+		string text = $"{date.Day}{date.GetMonthDaySuffix()} of {date:MMMM}, {date:yyyy} at {date:HH:mm:ss}";
+
+		writer.Write($"<time datetime=\"{attr.AttributeEncode()}\" title=\"{titleSuffix} {attr.AttributeEncode()}\">{text.ContentEncode()}</time>");
+
+		return writer;
 	}
 	public static IndentedTextWriter WriteDocType(this IndentedTextWriter writer)
 	{
@@ -106,6 +128,11 @@ public static class IndentedTextWriterExtensions
 	public static IndentedTextWriter Line(this IndentedTextWriter writer, string text)
 	{
 		writer.WriteLine(text);
+		return writer;
+	}
+	public static IndentedTextWriter Text(this IndentedTextWriter writer, string text)
+	{
+		writer.Write(text);
 		return writer;
 	}
 	public static IndentedTextWriter Space(this IndentedTextWriter writer)
