@@ -102,6 +102,16 @@ public static class IndentedTextWriterExtensions
 		writer.WriteLine();
 		return writer;
 	}
+	public static IndentedTextWriter Line(this IndentedTextWriter writer, string text)
+	{
+		writer.WriteLine(text);
+		return writer;
+	}
+	public static IndentedTextWriter Space(this IndentedTextWriter writer)
+	{
+		writer.Write(' ');
+		return writer;
+	}
 	public static IndentedTextWriter TableOfContentsItem(this IndentedTextWriter writer, string id, string text)
 	{
 		using (writer.Tag("li"))
@@ -115,7 +125,7 @@ public static class IndentedTextWriterExtensions
 		using (writer.Comment("Table of contents").Section("toc", "section"))
 		{
 			using (writer.Card())
-				writer.LinkHeading("h2", "#toc", "Anchor link to this section.", "Table of contents");
+				writer.LinkHeading("h2", "#toc", "Anchor link to this section of the page", "Table of contents");
 
 			using (writer.Region())
 			using (writer.TagBlock("ol"))
@@ -132,6 +142,31 @@ public static class IndentedTextWriterExtensions
 						foreach (SubSectionNode subSection in section.SubSections)
 							writer.TableOfContentsItem(subSection.Id, subSection.Title);
 					}
+				}
+			}
+		}
+
+		return writer;
+	}
+	public static IndentedTextWriter TableOfContents(this IndentedTextWriter writer, IEnumerable<ProjectModel> projects)
+	{
+		using (writer.Comment("Table of contents").Section("toc", "section"))
+		{
+			using (writer.Card())
+				writer.LinkHeading("h2", "#toc", "Anchor link to this section of the page", "Table of contents");
+
+			using (writer.Region())
+			using (writer.TagBlock("ol"))
+			{
+				writer
+					.TableOfContentsItem("about-me", "About me")
+					.TableOfContentsItem("toc", "Table of contents")
+					.TableOfContentsItem("wishlist", "Wishlist");
+
+				using (writer.TagBlock("ol"))
+				{
+					foreach (ProjectModel project in projects)
+						writer.TableOfContentsItem(project.Id, project.Name);
 				}
 			}
 		}
@@ -381,6 +416,9 @@ public static class IndentedTextWriterExtensions
 
 		foreach (string style in shared)
 			writer.MetaLink("stylesheet", isProject ? $"../{style}" : style);
+
+		if (model is IndexModel)
+			writer.MetaLink("stylesheet", "index.css");
 
 		return writer;
 	}

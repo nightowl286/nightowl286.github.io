@@ -24,25 +24,63 @@ class Program
 	{
 		model.PageTemplate(writer =>
 		{
-			using (writer.Section("wishlist"))
+			using (writer.Comment("About me").Section("about-me", "section"))
 			{
-				using (writer.TagBlock("div", cls: "card"))
+				using (writer.Card())
 				{
-					writer.Tag("h2", "Wishlist");
+					writer
+						.LinkHeading("h1", "about-me", "Anchor to this section of the page", "About me")
+						.Line("<img src=\"resources/pfp.png\" alt=\"Profile picture for Nightowl286\" title=\"Profile picture for Nightowl286\" style=\"grid-column: 1;\">")
+						.Line("<img src=\"resources/pfp.png\" alt=\"Profile picture for Nightowl286\" title=\"Profile picture for Nightowl286\" style=\"grid-column: 3; transform: scaleX(-1);\">");
+
+					using (writer.TagBlock("p"))
+					{
+						writer.TextNode(model.Summary).LineBreak().Br().Br();
+
+						foreach (ProfileLinkNode profile in model.ProfileLinks)
+						{
+							string alt = $"{profile.Title} badge";
+							string badgeUrl = $"https://img.shields.io/badge/{profile.Name}-{profile.Name}?style=flat&logo={profile.Logo}&labelColor=%23{profile.Color}&color=646464";
+
+							using (writer.Link(profile.Url, profile.Title, true))
+								writer.Line($"<img alt=\"{alt.AttributeEncode()} badge\" src=\"{badgeUrl.AttributeEncode()}\">");
+						}
+					}
+				}
+
+				using (writer.Region())
+				{
+					foreach (ParagraphTextNode paragraph in model.Content.Paragraphs)
+						writer.Paragraph(paragraph);
+				}
+			}
+
+			writer.TableOfContents(projects);
+
+			using (writer.Comment("Wishlist").Section("wishlist", "section"))
+			{
+				using (writer.Card())
+				{
+					writer.LinkHeading("h2", "wishlist", "Anchor to this section of the page", "Wishlist");
 					using (writer.Paragraph())
 						writer.TextNode(model.Wishlist);
 				}
-
 				foreach (ProjectModel project in projects)
 				{
 					writer.WriteLine();
 
 					using (writer.Section(project.Id, "project"))
 					{
-						writer.LinkHeading("h3", project.Id, "Anchor link to this project summary.", project.Name);
+						writer.LinkHeading("h3", project.Id, "Anchor link to this project summary", project.Name);
 
+						using (writer.Region())
 						using (writer.Paragraph())
-							writer.TextNode(project.Summary);
+						{
+							writer
+								.TextNode(project.Summary)
+								.Space()
+								.Link($"wishlist/{project.Id}.html", $"Read more about the {project.Name} project", false, "Read more.");
+						}
 					}
 				}
 			}
@@ -57,7 +95,8 @@ class Program
 				using (writer.Card())
 				{
 					writer
-						.LinkHeading("h1", "introduction", null, model.Name)
+						.LinkHeading("h1", "introduction", "Anchor link to this section of the page", model.Name)
+						.Br()
 						.Paragraph(model.Summary)
 						.Br()
 						.Link("../index.html", "Return to the home page", false, "Return to the home page.");
@@ -78,7 +117,7 @@ class Program
 					using (writer.Card())
 					{
 						writer
-							.LinkHeading("h2", section.Id, "Anchor link to this section.", section.Title)
+							.LinkHeading("h2", section.Id, "Anchor link to this section of the page", section.Title)
 							.Paragraph(section.Summary);
 					}
 
@@ -89,7 +128,7 @@ class Program
 					{
 						using (writer.LineBreak().Comment(subSection.Title).Section(subSection.Id, "sub-section"))
 						{
-							writer.LinkHeading("h3", subSection.Id, "Anchor link to this section.", subSection.Title);
+							writer.LinkHeading("h3", subSection.Id, "Anchor link to this section of the page", subSection.Title);
 							using (writer.Region())
 							{
 								foreach (ParagraphTextNode paragraph in subSection.Paragraphs.Paragraphs)

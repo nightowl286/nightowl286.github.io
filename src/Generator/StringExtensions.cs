@@ -16,6 +16,13 @@ public static class StringExtensions
 		return value;
 	}
 
+	public static string? UrlEncode(this string? value)
+	{
+		value = HttpUtility.UrlEncode(value);
+
+		return value;
+	}
+
 	[return: NotNullIfNotNull(nameof(value))]
 	public static string? AttributeEncode(this string? value)
 	{

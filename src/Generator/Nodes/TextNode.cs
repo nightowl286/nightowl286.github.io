@@ -65,6 +65,7 @@ public abstract class TextNode
 
 		return element.Name switch
 		{
+			"proile" => new ProfileLinkNode(element),
 			"link" => new LinkTextNode(element, children),
 			"abbr" => new AbbreviationTextNode(element, children),
 			"thought" => new ThoughtTextNode(children),
