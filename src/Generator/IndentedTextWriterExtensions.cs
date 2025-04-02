@@ -43,6 +43,7 @@ public static class IndentedTextWriterExtensions
 			{
 				writer
 					.EmbedStyle(Program.InlineCssPath)
+					.StyleLinks(model)
 					.GeneralMeta()
 					.Title(model)
 					.Description(model);
@@ -111,21 +112,26 @@ public static class IndentedTextWriterExtensions
 	}
 	public static IndentedTextWriter TableOfContents(this IndentedTextWriter writer, ProjectModel model)
 	{
-		writer.Comment("Table of contents");
-		using (writer.Section("toc"))
-		using (writer.TagBlock("ol"))
+		using (writer.Comment("Table of contents").Section("toc", "section"))
 		{
-			writer
-				.TableOfContentsItem("introduction", "Introduction")
-				.TableOfContentsItem("toc", "Table of contents");
+			using (writer.Card())
+				writer.LinkHeading("h2", "#toc", "Anchor link to this section.", "Table of contents");
 
-			foreach (SectionNode section in model.Sections)
+			using (writer.Region())
+			using (writer.TagBlock("ol"))
 			{
-				writer.TableOfContentsItem(section.Id, section.Title);
-				using (writer.TagBlock("ol"))
+				writer
+					.TableOfContentsItem("introduction", "Introduction")
+					.TableOfContentsItem("toc", "Table of contents");
+
+				foreach (SectionNode section in model.Sections)
 				{
-					foreach (SubSectionNode subSection in section.SubSections)
-						writer.TableOfContentsItem(subSection.Id, subSection.Title);
+					writer.TableOfContentsItem(section.Id, section.Title);
+					using (writer.TagBlock("ol"))
+					{
+						foreach (SubSectionNode subSection in section.SubSections)
+							writer.TableOfContentsItem(subSection.Id, subSection.Title);
+					}
 				}
 			}
 		}
@@ -186,14 +192,19 @@ public static class IndentedTextWriterExtensions
 	#endregion
 
 	#region Tag methods
-	public static TagScope Tag(this IndentedTextWriter writer, string tag, bool appendLineBreak = true)
+	public static TagScope Tag(this IndentedTextWriter writer, string tag, bool appendLineBreak = true, string? id = null, string? cls = null)
 	{
-		writer.Write($"<{tag}>");
+		writer.Write($"<{tag}");
+
+		if (id is not null) writer.Write($" id=\"{id.AttributeEncode()}\"");
+		if (cls is not null) writer.Write($" class=\"{cls.AttributeEncode()}\"");
+
+		writer.Write(">");
 		return new(writer, tag, false, appendLineBreak);
 	}
-	public static IndentedTextWriter Tag(this IndentedTextWriter writer, string tag, string value, bool appendLineBreak = true)
+	public static IndentedTextWriter Tag(this IndentedTextWriter writer, string tag, string value, bool appendLineBreak = true, string? id = null, string? cls = null)
 	{
-		using (Tag(writer, tag, appendLineBreak))
+		using (Tag(writer, tag, appendLineBreak, id, cls))
 			writer.Write(value.ContentEncode());
 
 		return writer;
@@ -203,7 +214,7 @@ public static class IndentedTextWriterExtensions
 	#region Text node methods
 	public static IndentedTextWriter Thought(this IndentedTextWriter writer, ThoughtTextNode thought)
 	{
-		using (Tag(writer, "i", false))
+		using (Tag(writer, "i", false, cls: "thought"))
 			return TextNodeChildren(writer, thought);
 	}
 	public static IndentedTextWriter Link(this IndentedTextWriter writer, LinkTextNode link)
@@ -211,18 +222,48 @@ public static class IndentedTextWriterExtensions
 		using (Link(writer, link.Link, link.Title, link.ShouldMultiline()))
 			return TextNodeChildren(writer, link);
 	}
+	public static IndentedTextWriter Abbreviation(this IndentedTextWriter writer, AbbreviationTextNode abbreviation)
+	{
+		return Abbreviation(writer, abbreviation.Title, abbreviation);
+	}
+	public static IndentedTextWriter Abbreviation(this IndentedTextWriter writer, string title, TextNodeCollection children)
+	{
+		writer.Write($"<abbr title=\"{title.AttributeEncode()}\">");
+		TextNodeChildren(writer, children);
+		writer.Write("</abbr>");
+		return writer;
+	}
 	public static IndentedTextWriter TextNode(this IndentedTextWriter writer, TextNode node)
 	{
 		if (node is PlainTextNode plain)
 		{
-			writer.Write(plain.Text.ContentEncode());
+			writer.Write(plain.Text.ContentEncode().Replace("&quot;", "\""));
 			return writer;
 		}
 		else if (node is LinkTextNode link)
 			return Link(writer, link);
 		else if (node is ThoughtTextNode thought)
 			return Thought(writer, thought);
-		else if (node is TextNodeCollection collection)
+		else if (node is AbbreviationTextNode abbreviation)
+			return Abbreviation(writer, abbreviation);
+		else if (node is ParagraphTextNode paragraph)
+			return TextNodeChildren(writer, paragraph);
+		else if (node is EmphasisTextNode emphasis)
+		{
+			using (Tag(writer, "em", false))
+				return TextNodeChildren(writer, emphasis);
+		}
+		else if (node is CodeTextNode code)
+		{
+			using (Tag(writer, "code", false))
+				return TextNodeChildren(writer, code);
+		}
+		else if (node is SuperScriptTextNode super)
+		{
+			using (Tag(writer, "sup", false))
+				return TextNodeChildren(writer, super);
+		}
+		else if (node is TextNodeCollection collection && node.GetType() == typeof(TextNodeCollection)) // Direct class, not as a base.
 			return TextNodeChildren(writer, collection);
 
 		throw new ArgumentException($"Unknown text node ({node}).", nameof(node));
@@ -331,6 +372,18 @@ public static class IndentedTextWriterExtensions
 		using (writer.Style())
 			return EmbedFile(writer, path);
 	}
+	public static IndentedTextWriter StyleLinks(this IndentedTextWriter writer, IPageModel model)
+	{
+		writer.Comment("Stylesheets");
+
+		ReadOnlySpan<string> shared = ["normalize.css", "inline.css", "style.css"];
+		bool isProject = model is ProjectModel;
+
+		foreach (string style in shared)
+			writer.MetaLink("stylesheet", isProject ? $"../{style}" : style);
+
+		return writer;
+	}
 	#endregion
 
 	#region Meta methods
@@ -376,6 +429,7 @@ public static class IndentedTextWriterExtensions
 	public static IndentedTextWriter GeneralMeta(this IndentedTextWriter writer)
 	{
 		return writer
+			.LineBreak()
 			.Comment("General meta")
 			.Meta(charset: "utf-8")
 			.Meta(name: "viewport", content: "width=device-width, initial-scale=1")

@@ -15,13 +15,11 @@ class Program
 		ProjectModel[] projectModels = LoadWishlistModels();
 
 		CleanDirectory(BuildPath);
+		CopyAssets();
 		BuildIndexPage(indexModel, projectModels.OrderBy(p => p.Id));
 
 		Array.ForEach(projectModels, BuildProjectPage);
 	}
-	#endregion
-
-	#region Helpers
 	private static void BuildIndexPage(IndexModel model, IEnumerable<ProjectModel> projects)
 	{
 		model.PageTemplate(writer =>
@@ -54,8 +52,7 @@ class Program
 	{
 		model.PageTemplate(writer =>
 		{
-			writer.Comment("Introduction");
-			using (writer.Section("introduction"))
+			using (writer.Comment("Introduction").Section("introduction", "section"))
 			{
 				using (writer.Card())
 				{
@@ -66,9 +63,7 @@ class Program
 						.Link("../index.html", "Return to the home page", false, "Return to the home page.");
 				}
 
-				writer.LineBreak();
-
-				using (writer.Region())
+				using (writer.LineBreak().Region())
 					writer.Paragraph(model.Content);
 			}
 
@@ -78,25 +73,55 @@ class Program
 
 			foreach (SectionNode section in model.Sections)
 			{
-				writer
-					.LineBreak()
-					.Comment(section.Title);
-
-				using (writer.Section(section.Id, "section"))
+				using (writer.LineBreak().Comment(section.Title).Section(section.Id, "section"))
 				{
 					using (writer.Card())
 					{
 						writer
 							.LinkHeading("h2", section.Id, "Anchor link to this section.", section.Title)
 							.Paragraph(section.Summary);
+					}
 
-						using (writer.Region())
-							writer.Paragraph(section.Content);
+					using (writer.Region())
+						writer.Paragraph(section.Content);
+
+					foreach (SubSectionNode subSection in section.SubSections)
+					{
+						using (writer.LineBreak().Comment(subSection.Title).Section(subSection.Id, "sub-section"))
+						{
+							writer.LinkHeading("h3", subSection.Id, "Anchor link to this section.", subSection.Title);
+							using (writer.Region())
+							{
+								foreach (ParagraphTextNode paragraph in subSection.Paragraphs.Paragraphs)
+									writer.Paragraph(paragraph);
+							}
+						}
 					}
 				}
 			}
 		});
 	}
+	private static void CopyAssets()
+	{
+		IEnumerable<string> files =
+			Directory.EnumerateFiles(ContentPath, "*", SearchOption.AllDirectories)
+			.Where(path => Path.GetExtension(path) is not ".xml");
+
+		foreach (string file in files)
+		{
+			string relative = Path.GetRelativePath(ContentPath, file);
+			string buildPath = Path.Combine(BuildPath, relative);
+			string? directory = Path.GetDirectoryName(buildPath);
+
+			if (Directory.Exists(directory) is false && directory is not null)
+				Directory.CreateDirectory(directory);
+
+			File.Copy(file, buildPath);
+		}
+	}
+	#endregion
+
+	#region Helpers
 	private static void CleanDirectory(string directory)
 	{
 		if (Directory.Exists(directory))

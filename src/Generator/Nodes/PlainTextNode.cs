@@ -7,7 +7,7 @@ public sealed class PlainTextNode(string text) : TextNode
 {
 	#region Properties
 #pragma warning disable SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
-	public string Text { get; } = Regex.Replace(text, @"\n\t+", " ");
+	public string Text { get; } = Regex.Replace(text, @"\n?\t+", " ");
 #pragma warning restore SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
 	#endregion
 

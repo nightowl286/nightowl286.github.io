@@ -1,0 +1,91 @@
+/* General */
+
+* {
+	margin: 0;
+}
+
+html {
+	font-family: 'Noto Sans', sans-serif;
+}
+
+body {
+	max-width: 70ch;
+	margin: auto;
+}
+
+
+/* Links */
+
+a, a:visited {
+	color: rgb(50, 150, 255);
+	text-decoration: none;
+}
+
+a:hover:not(:has(img)) {
+	text-decoration: underline;
+}
+
+
+/* Blocks */
+
+.card {
+	border-radius: 30px 30px 5px 5px;
+	background-color: #202020;
+	padding: 5px 15px;
+	margin: 15px 5px;
+	filter: drop-shadow(0px 0px 5px black);
+	text-align: center;
+}
+
+
+/* Regions */
+
+.region {
+	margin: 0 30px;
+	padding: 3px 16px;
+	border-color: #808080;
+	border-style: solid;
+	border-width: 0 3px;
+	border-radius: 3px;
+}
+
+.region:hover {
+	border-color: #d7d7d7;
+}
+
+.region p {
+	text-align: justify;
+}
+
+.region p:has(+ p) {
+	margin-bottom: 1em;
+}
+
+.section:has(+ .section) {
+	margin-bottom: 5em;
+}
+
+.sub-section {
+	margin: 20px 0;
+}
+
+/* Thoughts */
+.thought {
+	color: #808080;
+}
+
+.thought:hover {
+	color: #d7d7d7;
+}
+
+
+/* Headings */
+
+h1, h2, h3 {
+	margin: 0;
+}
+
+.sub-section > h3 {
+	text-decoration: none;
+	text-align: center;
+}
