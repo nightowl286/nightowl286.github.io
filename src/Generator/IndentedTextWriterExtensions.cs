@@ -59,13 +59,13 @@ public static class IndentedTextWriterExtensions
 				using (writer.Footer())
 				{
 					using (writer.Paragraph())
-						writer.Text("Created on the ").Date("Created on", model.Published);
+						writer.Text("Created on the ").Date("Created on", model.Published).Text(".");
 
 					using (writer.Paragraph())
-						writer.Text("Updated on the ").Date("Updated on", model.Updated);
+						writer.Text("Updated on the ").Date("Updated on", model.Updated).Text(".");
 
 					using (writer.Paragraph())
-						writer.Text("Built on the ").Date("Built on", DateTime.UtcNow);
+						writer.Text("Built on the ").Date("Built on", DateTime.UtcNow).Text(".");
 
 					using (writer.Br().Paragraph())
 						writer.Text("Disclaimer: I may be a programmer, but I am most certainly not a web developer.");
@@ -97,8 +97,8 @@ public static class IndentedTextWriterExtensions
 	}
 	public static IndentedTextWriter Date(this IndentedTextWriter writer, string titleSuffix, DateTime date)
 	{
-		string attr = date.ToString("yyyy-MM-dd HH:mm:ss");
-		string text = $"{date.Day}{date.GetMonthDaySuffix()} of {date:MMMM}, {date:yyyy} at {date:HH:mm:ss}";
+		string attr = date.ToString("yyyy-MM-dd HH:mm:ss") + " +00:00";
+		string text = $"{date.Day}{date.GetMonthDaySuffix()} of {date:MMMM}, {date:yyyy} at {date:HH:mm:ss} UTC";
 
 		writer.Write($"<time datetime=\"{attr.AttributeEncode()}\" title=\"{titleSuffix} {attr.AttributeEncode()}\">{text.ContentEncode()}</time>");
 
