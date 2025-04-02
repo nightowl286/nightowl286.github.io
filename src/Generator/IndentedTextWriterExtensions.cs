@@ -336,7 +336,7 @@ public static class IndentedTextWriterExtensions
 		TextNode? last = null;
 		foreach (TextNode node in collection.Children)
 		{
-			if (last is PlainTextNode plain && (plain.Text.EndsWith(' ') is false))
+			if (last is PlainTextNode plain && (plain.Text.EndsWith(' ') is false) && (node is not SuperScriptTextNode))
 				writer.Write(" ");
 
 			TextNode(writer, node);
