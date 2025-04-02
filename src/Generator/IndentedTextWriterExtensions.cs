@@ -45,6 +45,7 @@ public static class IndentedTextWriterExtensions
 					.EmbedStyle(Program.InlineCssPath)
 					.StyleLinks(model)
 					.GeneralMeta()
+					.MetaIcon(model)
 					.Title(model)
 					.Description(model);
 			}
@@ -425,6 +426,25 @@ public static class IndentedTextWriterExtensions
 	#endregion
 
 	#region Meta methods
+	public static IndentedTextWriter MetaIcon(this IndentedTextWriter writer, IPageModel model)
+	{
+		string prefix = model switch
+		{
+			ProjectModel => "../",
+			_ => string.Empty
+		};
+		string png = $"{prefix}resources/icon.png";
+
+		writer
+			.Comment("Icons")
+			.MetaLink("icon", png, sizes: "256x256")
+			.MetaLink("apple-touch-icon", png)
+			.MetaLink("mask-icon", png, color: "#171717")
+			.Meta(name: "og:image", content: "https://raw.githubusercontent.com/nightowl286/nightowl286.github.io/master/content/resources/icon.png")
+			.LineBreak();
+
+		return writer;
+	}
 	public static IndentedTextWriter Meta(
 			this IndentedTextWriter writer,
 			string? charset = null,
@@ -451,15 +471,23 @@ public static class IndentedTextWriterExtensions
 		writer.WriteLine(">");
 		return writer;
 	}
-	public static IndentedTextWriter MetaLink(this IndentedTextWriter writer, string rel, string href)
+	public static IndentedTextWriter MetaLink(this IndentedTextWriter writer, string rel, string href, string? sizes = null, string? color = null)
 	{
-		rel = rel.AttributeEncode();
-		href = href.AttributeEncode();
+		Dictionary<string, string?> parts = new()
+		{
+			{ "rel", rel },
+			{ "sizes", sizes },
+			{ "href", href },
+			{ "color", color }
+		};
 
 		writer.Write("<link");
 
-		writer.Write($" rel=\"{rel}\"");
-		writer.Write($" href=\"{href}\"");
+		foreach (KeyValuePair<string, string?> pair in parts)
+		{
+			if (pair.Value is not null)
+				writer.Write($" {pair.Key}=\"{pair.Value}\"");
+		}
 
 		writer.WriteLine(">");
 		return writer;
