@@ -12,6 +12,11 @@
 			<summary>
 				<thought>(Where do I even begin with this)</thought>
 			</summary>
+			<content>
+				Okay so shuffle algorithms suck when it comes to listening to music. There are a few
+				common <thought>(and terrible)</thought> things that a lot of programs and websites do when it
+				comes to shuffling, and they all suck in their own terrible ways.
+			</content>
 			<section id="random" title="Randomly picking the next song">
 				Why would anyone ever actually want this, like whyyyyyyy..... Just how lazy did the developers get?!
 				Do they even listen to music themselves?! Or talk to anyone that listens to music regularly?!
@@ -138,5 +143,6 @@
 			<summary>
 				<thought>(Early optimisation is the root of all evil).</thought>
 			</summary>
+			<content></content>
 	</article>
 </project>

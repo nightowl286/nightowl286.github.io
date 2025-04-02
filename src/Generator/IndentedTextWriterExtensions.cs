@@ -111,6 +111,7 @@ public static class IndentedTextWriterExtensions
 	}
 	public static IndentedTextWriter TableOfContents(this IndentedTextWriter writer, ProjectModel model)
 	{
+		writer.Comment("Table of contents");
 		using (writer.Section("toc"))
 		using (writer.TagBlock("ol"))
 		{
@@ -149,7 +150,27 @@ public static class IndentedTextWriterExtensions
 	public static TagScope MainBlock(this IndentedTextWriter writer) => TagBlock(writer, "main");
 	public static TagScope Style(this IndentedTextWriter writer) => TagBlock(writer, "style", true);
 	public static TagScope Paragraph(this IndentedTextWriter writer) => TagBlock(writer, "p", false, true);
+	public static IndentedTextWriter Paragraph(this IndentedTextWriter writer, TextNode node)
+	{
+		using (Paragraph(writer))
+			return TextNode(writer, node);
+	}
 	public static TagScope Section(this IndentedTextWriter writer, string? id = null, string? cls = null) => TagBlock(writer, "section", id: id, cls: cls);
+	public static TagScope Card(this IndentedTextWriter writer) => TagBlock(writer, "div", cls: "card");
+	public static TagScope Region(this IndentedTextWriter writer) => TagBlock(writer, "div", cls: "region");
+	public static IndentedTextWriter Br(this IndentedTextWriter writer)
+	{
+		writer.WriteLine("<br>");
+		return writer;
+	}
+	public static IndentedTextWriter LinkHeading(this IndentedTextWriter writer, string tag, string id, string? title, string heading)
+	{
+		using (Tag(writer, tag))
+		using (Link(writer, $"#{id}", title, false))
+			writer.Write(heading.ContentEncode());
+
+		return writer;
+	}
 	public static TagScope TagBlock(this IndentedTextWriter writer, string tag, bool suffixLineBreak = false, bool prefixLineBreakBeforeEnd = false, string? id = null, string? cls = null)
 	{
 		writer.Write($"<{tag}");
@@ -204,7 +225,7 @@ public static class IndentedTextWriterExtensions
 		else if (node is TextNodeCollection collection)
 			return TextNodeChildren(writer, collection);
 
-		return writer;
+		throw new ArgumentException($"Unknown text node ({node}).", nameof(node));
 	}
 	public static IndentedTextWriter TextNodeChildren(this IndentedTextWriter writer, TextNodeCollection collection)
 	{
@@ -218,6 +239,13 @@ public static class IndentedTextWriterExtensions
 
 			last = node;
 		}
+
+		return writer;
+	}
+	public static IndentedTextWriter Link(this IndentedTextWriter writer, string link, string? title, bool isBlock, string text)
+	{
+		using (Link(writer, link, title, isBlock))
+			writer.Write(text.ContentEncode());
 
 		return writer;
 	}

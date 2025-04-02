@@ -3,7 +3,7 @@ namespace Generator;
 public static class XmlExtensions
 {
 	#region Methods
-	public static IEnumerable<T> Select<T>(this XmlNodeList? list, Func<XmlNode, T> callback)
+	public static IReadOnlyList<T> Select<T>(this XmlNodeList? list, Func<XmlNode, T> callback)
 	{
 		List<T> values = [];
 
@@ -52,9 +52,11 @@ public static class XmlExtensions
 
 		return TextNode.ParseParagraphs(node);
 	}
-	public static TextNode Parse(this XmlNode node, string xpath)
+	public static TextNode Parse(this XmlNode node, string? xpath = null)
 	{
-		node = node.SelectRequiredSingleNode(xpath);
+		if (xpath is not null)
+			node = node.SelectRequiredSingleNode(xpath);
+
 		IReadOnlyList<TextNode> children = TextNode.ParseChildren(node);
 
 		return new TextNodeCollection(children);
@@ -67,6 +69,16 @@ public static class XmlExtensions
 			return foundNode;
 
 		throw new ArgumentException($"A single node couldn't be selected using the given xpath ({xpath}).", nameof(node));
+	}
+	public static XmlNode SelectRequiredChildNode(this XmlNode node, string name)
+	{
+		foreach (XmlNode current in node.ChildNodes)
+		{
+			if (current.Name == name)
+				return current;
+		}
+
+		throw new ArgumentException($"A single child node couldn't be selected using the given name ({name}).", nameof(name));
 	}
 	private static XmlElement AsElement(this XmlNode node)
 	{

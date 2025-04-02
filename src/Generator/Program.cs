@@ -39,10 +39,9 @@ class Program
 				{
 					writer.WriteLine();
 
-					using (writer.Section(project.Id, "projecct"))
+					using (writer.Section(project.Id, "project"))
 					{
-						using (writer.Link($"#{project.Id}", project.Name, true))
-							writer.Tag("h3", project.Name);
+						writer.LinkHeading("h3", project.Id, "Anchor link to this project summary.", project.Name);
 
 						using (writer.Paragraph())
 							writer.TextNode(project.Summary);
@@ -55,14 +54,47 @@ class Program
 	{
 		model.PageTemplate(writer =>
 		{
+			writer.Comment("Introduction");
 			using (writer.Section("introduction"))
 			{
+				using (writer.Card())
+				{
+					writer
+						.LinkHeading("h1", "introduction", null, model.Name)
+						.Paragraph(model.Summary)
+						.Br()
+						.Link("../index.html", "Return to the home page", false, "Return to the home page.");
+				}
 
+				writer.LineBreak();
+
+				using (writer.Region())
+					writer.Paragraph(model.Content);
 			}
 
 			writer
 				.LineBreak()
 				.TableOfContents(model);
+
+			foreach (SectionNode section in model.Sections)
+			{
+				writer
+					.LineBreak()
+					.Comment(section.Title);
+
+				using (writer.Section(section.Id, "section"))
+				{
+					using (writer.Card())
+					{
+						writer
+							.LinkHeading("h2", section.Id, "Anchor link to this section.", section.Title)
+							.Paragraph(section.Summary);
+
+						using (writer.Region())
+							writer.Paragraph(section.Content);
+					}
+				}
+			}
 		});
 	}
 	private static void CleanDirectory(string directory)

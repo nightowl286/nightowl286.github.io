@@ -21,12 +21,12 @@ public sealed class ProjectModel : IPageModel
 		Date = xml.GetDateAttribute("date");
 		Title = IndexModel.DefaultTitle + $" - {Name} wishlist project";
 
-		string summary = xml.SelectRequiredSingleNode("//summary").InnerText;
+		string summary = xml.SelectRequiredSingleNode(".//summary").InnerText;
 		Description = "A post about Nightowl's project idea to " + summary;
 		Summary = new PlainTextNode("A project to " + summary);
 
-		Content = xml.Parse("//content");
-		Sections = xml.SelectRequiredSingleNode("project").SelectChildNodes("article", n => new SectionNode(n));
+		Content = xml.Parse(".//content");
+		Sections = xml.SelectNodes(".//article").Select(n => new SectionNode(n));
 	}
 	#endregion
 }
