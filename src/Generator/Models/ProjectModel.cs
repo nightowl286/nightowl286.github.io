@@ -5,7 +5,8 @@ public sealed class ProjectModel : IPageModel
 	#region Properties
 	public string Id { get; }
 	public string Name { get; }
-	public DateTime Date { get; }
+	public DateTime Published { get; }
+	public DateTime Updated { get; }
 	public string Title { get; }
 	public string Description { get; }
 	public TextNode Summary { get; }
@@ -18,7 +19,8 @@ public sealed class ProjectModel : IPageModel
 	{
 		Id = id;
 		Name = xml.GetRequiredAttribute("name");
-		Date = xml.GetDateAttribute("date");
+		Published = xml.GetDateAttribute("published");
+		Updated = xml.GetDateAttribute("updated");
 		Title = IndexModel.DefaultTitle + $" - {Name} wishlist project";
 
 		string summary = xml.SelectRequiredSingleNode(".//summary").InnerText;

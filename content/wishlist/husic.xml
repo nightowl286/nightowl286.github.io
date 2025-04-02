@@ -1,4 +1,4 @@
-<project name="Husic" date="2025-03-24 18:31:00">
+<project name="Husic" published="2025-03-24 18:31:00" updated="2025-03-24 18:31:00">
 	<summary>create the best offline music player, initially inspired simply because shuffle algorithms suck.</summary>
 	<content>
 			Music players are cool, there's a lot of different ways they can be made, they

@@ -12,11 +12,11 @@ class Program
 	public static void Main()
 	{
 		IndexModel indexModel = LoadIndexModel();
-		ProjectModel[] projectModels = LoadWishlistModels();
+		ProjectModel[] projectModels = LoadWishlistModels().OrderBy(p => p.Id).ToArray();
 
 		CleanDirectory(BuildPath);
 		CopyAssets();
-		BuildIndexPage(indexModel, projectModels.OrderBy(p => p.Id));
+		BuildIndexPage(indexModel, projectModels);
 
 		Array.ForEach(projectModels, BuildProjectPage);
 	}

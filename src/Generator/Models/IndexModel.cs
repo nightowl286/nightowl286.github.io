@@ -8,7 +8,8 @@ public sealed class IndexModel(XmlDocument xml) : IPageModel
 
 	#region Properties
 	public string Id => "index";
-	public DateTime Date { get; } = xml.GetDateAttribute("date");
+	public DateTime Published { get; } = xml.GetDateAttribute("published");
+	public DateTime Updated { get; } = xml.GetDateAttribute("updated");
 	public string Title => DefaultTitle;
 	public string Description { get; } = xml.GetRequiredAttribute("description");
 	public IReadOnlyList<ProfileLinkNode> ProfileLinks { get; } = xml.SelectNodes(".//profile").Select(n => new ProfileLinkNode(n));
