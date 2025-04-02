@@ -55,9 +55,11 @@ class Program
 				}
 			}
 
-			writer.TableOfContents(projects);
+			writer
+				.LineBreak()
+				.TableOfContents(projects);
 
-			using (writer.Comment("Wishlist").Section("wishlist", "section"))
+			using (writer.LineBreak().Comment("Wishlist").Section("wishlist", "section"))
 			{
 				using (writer.Card())
 				{
@@ -69,7 +71,7 @@ class Program
 				{
 					writer.WriteLine();
 
-					using (writer.Section(project.Id, "project"))
+					using (writer.Comment(project.Name).Section(project.Id, "project"))
 					{
 						writer.LinkHeading("h3", project.Id, "Anchor link to this project summary", project.Name);
 
