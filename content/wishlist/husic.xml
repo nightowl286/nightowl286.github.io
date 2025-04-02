@@ -1,142 +1,142 @@
 <project name="Husic" date="2025-03-24 18:31:00">
-   <summary>create the best offline music player, initially inspired simply because shuffle algorithms suck.</summary>
-   <content>
-      Music players are cool, there's a lot of different ways they can be made, they
-      come with different <abbr title="Quality of life">QoL</abbr> features, some forget
-      what the word <abbr title="Do not connect to the f**king internet">offline</abbr> means,
-      some decide to stream music from god knows what questionable sources, and some are
-      created by people who clearly have no artistic bone in their body <thought>(not their fault though)</thought>.
-   </content>
+	<summary>create the best offline music player, initially inspired simply because shuffle algorithms suck.</summary>
+	<content>
+			Music players are cool, there's a lot of different ways they can be made, they
+			come with different <abbr title="Quality of life">QoL</abbr> features, some forget
+			what the word <abbr title="Do not connect to the f**king internet">offline</abbr> means,
+			some decide to stream music from god knows what questionable sources, and some are
+			created by people who clearly have no artistic bone in their body <thought>(not their fault though)</thought>.
+	</content>
 
-   <article id="shuffle" title="Shuffle algorithms">
-      <summary>
-         <thought>(Where do I even begin with this)</thought>
-      </summary>
-      <section id="random" title="Randomly picking the next song">
-         Why would anyone ever actually want this, like whyyyyyyy..... Just how lazy did the developers get?!
-         Do they even listen to music themselves?! Or talk to anyone that listens to music regularly?!
-         Why in the name of all that is sane would <em>anyone</em> want this?!
-      
-         There are SOOOOO many problems with this approach <thought>(depending on just how lazy the <abbr title="developers">devs</abbr> are)</thought>,
-         especially when you're listening to shorter playlists. Imagine you get really unlucky, or the underlying
-         <link href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">
-            <abbr title="Pseudorandom number generator">PRNG</abbr>
-         </link>
-         algorithm is a really awful one, and the universe just deems that you should be jumping back and forth
-         between two or three songs.
-      
-         But has this actually happened to someone? God I hope not, but the fact that it <em>could</em> happen, is concerning.
-         Especially when the probability isn't even that low.
-      
-         Imagine you have a playlist that only contains 5 songs, so when a song
-         finishes plaything, there's a 25% probability for which song is chosen next
-         <thought>(if your random pick allows for picking the same song that has just played then please be ashamed of yourself even more)</thought>,
-         and so when that song finishes playing, there's a 25% probability
-         that the song you just listened to beforehand is picked.
-      
-         What's worse is that getting a pattern like: A ➞ B ➞<sup>25%</sup> A ➞<sup>25%</sup> B is still a 6.25%
-         probability, <thought>(since the first two picks don't matter, it only matters that the next two picks are the same as the first two)</thought>
-         and with how much I listen to music this could be happening every day!!!
+	<article id="shuffle" title="Shuffle algorithms">
+			<summary>
+				<thought>(Where do I even begin with this)</thought>
+			</summary>
+			<section id="random" title="Randomly picking the next song">
+				Why would anyone ever actually want this, like whyyyyyyy..... Just how lazy did the developers get?!
+				Do they even listen to music themselves?! Or talk to anyone that listens to music regularly?!
+				Why in the name of all that is sane would <em>anyone</em> want this?!
 
-         Does anyone actually do this? Yes, YouTube is a prime offender
-         <thought>(among all the other problems YouTube has, but more on that later)</thought>.
-      </section>
+				There are SOOOOO many problems with this approach <thought>(depending on just how lazy the <abbr title="developers">devs</abbr> are)</thought>,
+				especially when you're listening to shorter playlists. Imagine you get really unlucky, or the underlying
+				<link href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">
+					<abbr title="Pseudorandom number generator">PRNG</abbr>
+				</link>
+				algorithm is a really awful one, and the universe just deems that you should be jumping back and forth
+				between two or three songs.
 
-      <section id="upcoming" title="Shuffling the upcoming songs in the queue">
-         So usually, after the random pick algorithm has been thrown away because it sucks so much,
-         the developers instead decide to shuffle the upcoming songs that are currently in the queue.
+				But has this actually happened to someone? God I hope not, but the fact that it <em>could</em> happen, is concerning.
+				Especially when the probability isn't even that low.
 
-         This is already a huge improvement <thought>(but it obviously has it's flaws, otherwise I wouldn't be talking about it here)</thought>,
-         and if your playlist / queue is long enough, then it <em>usually</em> wouldn't cause you any further problems.
+				Imagine you have a playlist that only contains 5 songs, so when a song
+				finishes plaything, there's a 25% probability for which song is chosen next
+				<thought>(if your random pick allows for picking the same song that has just played then please be ashamed of yourself even more)</thought>,
+				and so when that song finishes playing, there's a 25% probability
+				that the song you just listened to beforehand is picked.
 
-         However, one big issue that I commonly see among the music players that do this, is that they don't re-shuffle
-         the queue once it has finished, they simply go back to the start.
+				What's worse is that getting a pattern like: A ➞ B ➞<sup>25%</sup> A ➞<sup>25%</sup> B is still a 6.25%
+				probability, <thought>(since the first two picks don't matter, it only matters that the next two picks are the same as the first two)</thought>
+				and with how much I listen to music this could be happening every day!!!
 
-         Now this is a big problem because a lot of of music players also don't include a 're-shuffle' button, or
-         when they do it's usually just a button that cycles between 'song shuffle', 'album shuffle' and 'no shuffle',
-         so you end up having to click on it multiple times which is just annoying if you have to do it often.
+				Does anyone actually do this? Yes, YouTube is a prime offender
+				<thought>(among all the other problems YouTube has, but more on that later)</thought>.
+			</section>
 
-         Another reason why not re-shuffling the queue is a problem, is that for a lot of people music is something that
-         they have on in the background, they don't want to be switching back to the music player to re-shuffle the queue.
+			<section id="upcoming" title="Shuffling the upcoming songs in the queue">
+				So usually, after the random pick algorithm has been thrown away because it sucks so much,
+				the developers instead decide to shuffle the upcoming songs that are currently in the queue.
 
-         Now you might say that if they only have the music on in the background, then they wouldn't care about re-shuffling,
-         and that's fair, they might not, I'd say that it depends on the person, for me, if I have a short playlist on, then I
-         will start noticing that it's repeating in the same order.
+				This is already a huge improvement <thought>(but it obviously has it's flaws, otherwise I wouldn't be talking about it here)</thought>,
+				and if your playlist / queue is long enough, then it <em>usually</em> wouldn't cause you any further problems.
 
-         Usually having a long playlist / queue avoids these problems. However, not always, because some people don't like
-         turning off their computers, and so their music player just stays open, keeping the exact same queue and never resetting.
+				However, one big issue that I commonly see among the music players that do this, is that they don't re-shuffle
+				the queue once it has finished, they simply go back to the start.
 
-         Now obviously a person probably wouldn't remember the exact order their songs were played in on the previous day, but when
-         you get the same order several days in a row, you will start noticing what song comes on after the current one.
-         Try it out yourself by just listening to one playlist for a few days without ever shuffling it.
+				Now this is a big problem because a lot of of music players also don't include a 're-shuffle' button, or
+				when they do it's usually just a button that cycles between 'song shuffle', 'album shuffle' and 'no shuffle',
+				so you end up having to click on it multiple times which is just annoying if you have to do it often.
 
-         This can also be problematic on phones, because sometimes the music playing <abbr title="applications">apps</abbr> will
-         keep the queue even after you close them, since they are still running in the background.
-      </section>
+				Another reason why not re-shuffling the queue is a problem, is that for a lot of people music is something that
+				they have on in the background, they don't want to be switching back to the music player to re-shuffle the queue.
 
-      <section id="youtube" title="YouTube">
-         So you might be thinking: "Why does YouTube get it's own section?" Well... That's
-         because it is the worst god damn piece of software that I have ever had the displeasure
-         of using to listen to music, it is absolutely dog poop and anyone who is on that developer
-         team should be ashamed of their existence for letting a product <em>so bad</em> continue to exist.
+				Now you might say that if they only have the music on in the background, then they wouldn't care about re-shuffling,
+				and that's fair, they might not, I'd say that it depends on the person, for me, if I have a short playlist on, then I
+				will start noticing that it's repeating in the same order.
 
-         Not only does it use the 'randomly picking the next song' approach, but whatever it uses for the
-         <link href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">
-            <abbr title="Pseudorandom number generator">PRNG</abbr>
-         </link>
-         can end up bugging out and getting stuck in an infinite loop of a small number of songs from the
-         playlist / queue repeating.
+				Usually having a long playlist / queue avoids these problems. However, not always, because some people don't like
+				turning off their computers, and so their music player just stays open, keeping the exact same queue and never resetting.
 
-         I have absolutely no idea how they managed to screw that up. I would honestly love to blame it on
-         the implementation of <link href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random"><code>Math.random()</code></link>
-         just to give YouTube at least a little bit of a chance, but it has happened to several different
-         people that I know, even across different browsers.
+				Now obviously a person probably wouldn't remember the exact order their songs were played in on the previous day, but when
+				you get the same order several days in a row, you will start noticing what song comes on after the current one.
+				Try it out yourself by just listening to one playlist for a few days without ever shuffling it.
 
-         But that's not the end of YouTube's bugs, ohhhhh no, obviously they just have to somehow
-         keep on screwing things up, in the most ridiculous ways, and going years without bothering
-         to fix them.
+				This can also be problematic on phones, because sometimes the music playing <abbr title="applications">apps</abbr> will
+				keep the queue even after you close them, since they are still running in the background.
+			</section>
 
-         So what is the next bug you ask? Well when you have a queue playing, then you also have the
-         toggle buttons for "shuffling" <thought>(even though it's just randomly picking the next song)</thought> and
-         repeating the entire queue once it ends. However, somehow, sometimes, for unknown reasons, those
-         toggle buttons end up resetting and turning off, meaning that occasionally, your songs stop
-         "shuffling", and even worse, they stop repeating.
+			<section id="youtube" title="YouTube">
+				So you might be thinking: "Why does YouTube get it's own section?" Well... That's
+				because it is the worst god damn piece of software that I have ever had the displeasure
+				of using to listen to music, it is absolutely dog poop and anyone who is on that developer
+				team should be ashamed of their existence for letting a product <em>so bad</em> continue to exist.
 
-         And because YouTube uses the 'pick the next song randomly' approach, it means that even if you
-         have a queue of several hundred or thousand songs, it's possible for it to jump to the last song,
-         then bug out and stop the queue from repeating, and once your song ends, so does your music.
-         <thought>(Assuming YouTube doesn't just start auto-playing a random video, because it also loves doing that for no reason).</thought>
-      </section>
+				Not only does it use the 'randomly picking the next song' approach, but whatever it uses for the
+				<link href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">
+					<abbr title="Pseudorandom number generator">PRNG</abbr>
+				</link>
+				can end up bugging out and getting stuck in an infinite loop of a small number of songs from the
+				playlist / queue repeating.
 
-      <section id="solution" title="Solution?">
-         So what's the solution to this? Is there a perfect shuffling algorithm
-         that creates the best music listening experience? And honestly, that I
-         do not know yet.
+				I have absolutely no idea how they managed to screw that up. I would honestly love to blame it on
+				the implementation of <link href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random"><code>Math.random()</code></link>
+				just to give YouTube at least a little bit of a chance, but it has happened to several different
+				people that I know, even across different browsers.
 
-         I have played around with some possible ideas, however at the present my
-         limited maths skills are letting me down. <thought>(I hate learning maths...)</thought>
+				But that's not the end of YouTube's bugs, ohhhhh no, obviously they just have to somehow
+				keep on screwing things up, in the most ridiculous ways, and going years without bothering
+				to fix them.
 
-         However, my general opinion is that shuffling algorithms should properly
-         keep track of the queue history, and use that information as heuristics
-         in order to eliminate repeating patterns.
+				So what is the next bug you ask? Well when you have a queue playing, then you also have the
+				toggle buttons for "shuffling" <thought>(even though it's just randomly picking the next song)</thought> and
+				repeating the entire queue once it ends. However, somehow, sometimes, for unknown reasons, those
+				toggle buttons end up resetting and turning off, meaning that occasionally, your songs stop
+				"shuffling", and even worse, they stop repeating.
 
-         In my opinion, that should at the very least include making sure that
-         songs that were near each other are spread out, while making sure to account
-         for the end and start of the queue.
+				And because YouTube uses the 'pick the next song randomly' approach, it means that even if you
+				have a queue of several hundred or thousand songs, it's possible for it to jump to the last song,
+				then bug out and stop the queue from repeating, and once your song ends, so does your music.
+				<thought>(Assuming YouTube doesn't just start auto-playing a random video, because it also loves doing that for no reason).</thought>
+			</section>
 
-         What I mean by this, is that if your current queue looked like <code>A, B, C, D</code>,
-         then the next shuffled queue (which will play afterwards) should not be
-         <code>C, A, D, B</code> for example. This is because when you combine them,
-         and look at what the user will actually be hearing, you'll get
-         <code>A, B, C, D, C, A, D, B</code> and from this you can clearly see the
-         <code>C, D, C</code> pattern, which can occur if you don't make sure to
-         check the end of the current queue, and the start of the new one.
-      </section>
-   </article>
+			<section id="solution" title="Solution?">
+				So what's the solution to this? Is there a perfect shuffling algorithm
+				that creates the best music listening experience? And honestly, that I
+				do not know yet.
 
-   <article id="covers" title="Album and song covers">
-      <summary>
-         <thought>(Early optimisation is the root of all evil).</thought>
-      </summary>
-   </article>
+				I have played around with some possible ideas, however at the present my
+				limited maths skills are letting me down. <thought>(I hate learning maths...)</thought>
+
+				However, my general opinion is that shuffling algorithms should properly
+				keep track of the queue history, and use that information as heuristics
+				in order to eliminate repeating patterns.
+
+				In my opinion, that should at the very least include making sure that
+				songs that were near each other are spread out, while making sure to account
+				for the end and start of the queue.
+
+				What I mean by this, is that if your current queue looked like <code>A, B, C, D</code>,
+				then the next shuffled queue (which will play afterwards) should not be
+				<code>C, A, D, B</code> for example. This is because when you combine them,
+				and look at what the user will actually be hearing, you'll get
+				<code>A, B, C, D, C, A, D, B</code> and from this you can clearly see the
+				<code>C, D, C</code> pattern, which can occur if you don't make sure to
+				check the end of the current queue, and the start of the new one.
+			</section>
+	</article>
+
+	<article id="covers" title="Album and song covers">
+			<summary>
+				<thought>(Early optimisation is the root of all evil).</thought>
+			</summary>
+	</article>
 </project>

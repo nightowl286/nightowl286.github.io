@@ -1,6 +1,6 @@
 namespace Generator.Models;
 
-public sealed class IndexModel : IPageModel
+public sealed class IndexModel(XmlDocument xml) : IPageModel
 {
 	#region Constants
 	public const string DefaultTitle = "Nightowl's website";
@@ -8,16 +8,11 @@ public sealed class IndexModel : IPageModel
 
 	#region Properties
 	public string Id => "index";
-	public DateTime Date { get; }
+	public DateTime Date { get; } = xml.GetDateAttribute("date");
 	public string Title => DefaultTitle;
-	public string Description { get; }
-	#endregion
-
-	#region Constructors
-	public IndexModel(XmlElement xml)
-	{
-		Date = xml.GetDateAttribute("date");
-		Description = xml.GetRequiredAttribute("description");
-	}
+	public string Description { get; } = xml.GetRequiredAttribute("description");
+	public TextNode Summary { get; } = xml.Parse("//summary");
+	public ParagraphTextNodeCollection Content { get; } = xml.ParseParagraphs("//content");
+	public TextNode Wishlist { get; } = xml.Parse("//wishlist");
 	#endregion
 }

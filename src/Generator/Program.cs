@@ -15,25 +15,54 @@ class Program
 		ProjectModel[] projectModels = LoadWishlistModels();
 
 		CleanDirectory(BuildPath);
-		BuildIndexPage(indexModel);
+		BuildIndexPage(indexModel, projectModels.OrderBy(p => p.Id));
 
 		Array.ForEach(projectModels, BuildProjectPage);
 	}
 	#endregion
 
 	#region Helpers
-	private static void BuildIndexPage(IndexModel model)
+	private static void BuildIndexPage(IndexModel model, IEnumerable<ProjectModel> projects)
 	{
 		model.PageTemplate(writer =>
 		{
+			using (writer.Section("wishlist"))
+			{
+				using (writer.TagBlock("div", cls: "card"))
+				{
+					writer.Tag("h2", "Wishlist");
+					using (writer.Paragraph())
+						writer.TextNode(model.Wishlist);
+				}
 
+				foreach (ProjectModel project in projects)
+				{
+					writer.WriteLine();
+
+					using (writer.Section(project.Id, "projecct"))
+					{
+						using (writer.Link($"#{project.Id}", project.Name, true))
+							writer.Tag("h3", project.Name);
+
+						using (writer.Paragraph())
+							writer.TextNode(project.Summary);
+					}
+				}
+			}
 		});
 	}
 	private static void BuildProjectPage(ProjectModel model)
 	{
 		model.PageTemplate(writer =>
 		{
+			using (writer.Section("introduction"))
+			{
 
+			}
+
+			writer
+				.LineBreak()
+				.TableOfContents(model);
 		});
 	}
 	private static void CleanDirectory(string directory)
@@ -53,7 +82,7 @@ class Program
 		{
 			string id = Path.GetFileNameWithoutExtension(files[i]);
 			XmlDocument xml = LoadXmlDocument(files[i]);
-			ProjectModel project = new(id, xml.GetRootElement());
+			ProjectModel project = new(id, xml);
 
 			projects[i] = project;
 		}
@@ -65,7 +94,7 @@ class Program
 		string path = Path.Combine(ContentPath, "index.xml");
 
 		XmlDocument xml = LoadXmlDocument(path);
-		IndexModel model = new(xml.GetRootElement());
+		IndexModel model = new(xml);
 
 		return model;
 	}

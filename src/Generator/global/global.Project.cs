@@ -5,3 +5,4 @@ global using System.Xml;
 
 
 global using Generator.Models;
+global using Generator.Nodes;

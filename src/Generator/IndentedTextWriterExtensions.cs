@@ -1,6 +1,6 @@
 namespace Generator;
 
-public readonly ref struct TagScope(IndentedTextWriter writer, string tag, bool isBlock, bool suffixLineBreak) : IDisposable
+public readonly ref struct TagScope(IndentedTextWriter writer, string tag, bool isBlock, bool suffixLineBreak, bool prefixLineBreakBeforeEnd = false) : IDisposable
 {
 	#region Fields
 	private readonly IndentedTextWriter _writer = writer;
@@ -11,6 +11,9 @@ public readonly ref struct TagScope(IndentedTextWriter writer, string tag, bool 
 	#region Methods
 	public readonly void Dispose()
 	{
+		if (prefixLineBreakBeforeEnd)
+			_writer.WriteLine();
+
 		if (_isBlock)
 		{
 			_writer.Indent--;
@@ -32,11 +35,8 @@ public static class IndentedTextWriterExtensions
 	#region Methods
 	public static void PageTemplate(this IPageModel model, Action<IndentedTextWriter> callback)
 	{
-		string path = Path.Combine(Program.BuildPath, $"{model.Id}.html");
-
-		using FileStream file = new(path, FileMode.CreateNew);
-		using StreamWriter streamWriter = new(file, Encoding.UTF8);
-		using IndentedTextWriter writer = new(streamWriter, "\t") { NewLine = "\n" };
+		using StringWriter stringWriter = new();
+		using (IndentedTextWriter writer = new(stringWriter, "\t") { NewLine = "\n" })
 		using (writer.Html())
 		{
 			using (writer.Head())
@@ -57,6 +57,27 @@ public static class IndentedTextWriterExtensions
 				using (writer.Footer())
 					writer.Tag("p", "Disclaimer: I may be a programmer, but I am most certainly not a web developer.");
 			}
+		}
+
+		string path = Program.BuildPath;
+
+		if (model is ProjectModel)
+			path = Path.Combine(path, "wishlist");
+
+		if (Directory.Exists(path) is false)
+			Directory.CreateDirectory(path);
+
+		path = Path.Combine(path, $"{model.Id}.html");
+
+		using (FileStream file = new(path, FileMode.CreateNew))
+		using (StreamWriter writer = new(file, Encoding.UTF8))
+		{
+			stringWriter.Flush();
+			string text = stringWriter
+				.ToString()
+				.Replace("\t ", "\t");
+
+			writer.Write(text);
 		}
 	}
 	public static IndentedTextWriter WriteDocType(this IndentedTextWriter writer)
@@ -80,6 +101,36 @@ public static class IndentedTextWriterExtensions
 		writer.WriteLine();
 		return writer;
 	}
+	public static IndentedTextWriter TableOfContentsItem(this IndentedTextWriter writer, string id, string text)
+	{
+		using (writer.Tag("li"))
+		using (writer.Link($"#{id}", null, false))
+			writer.Write(text);
+
+		return writer;
+	}
+	public static IndentedTextWriter TableOfContents(this IndentedTextWriter writer, ProjectModel model)
+	{
+		using (writer.Section("toc"))
+		using (writer.TagBlock("ol"))
+		{
+			writer
+				.TableOfContentsItem("introduction", "Introduction")
+				.TableOfContentsItem("toc", "Table of contents");
+
+			foreach (SectionNode section in model.Sections)
+			{
+				writer.TableOfContentsItem(section.Id, section.Title);
+				using (writer.TagBlock("ol"))
+				{
+					foreach (SubSectionNode subSection in section.SubSections)
+						writer.TableOfContentsItem(subSection.Id, subSection.Title);
+				}
+			}
+		}
+
+		return writer;
+	}
 	#endregion
 
 	#region Tag block methods
@@ -87,7 +138,7 @@ public static class IndentedTextWriterExtensions
 	{
 		WriteDocType(writer);
 
-		writer.WriteLine($"<html lang=\"en\" itemscope itemtype=\"https://schema.org/Article\">");
+		writer.WriteLine($"<html lang=\"en\">");
 		writer.Indent++;
 
 		return new(writer, "html", true, false);
@@ -97,17 +148,24 @@ public static class IndentedTextWriterExtensions
 	public static TagScope Footer(this IndentedTextWriter writer) => TagBlock(writer, "footer");
 	public static TagScope MainBlock(this IndentedTextWriter writer) => TagBlock(writer, "main");
 	public static TagScope Style(this IndentedTextWriter writer) => TagBlock(writer, "style", true);
-	public static TagScope TagBlock(this IndentedTextWriter writer, string tag, bool suffixLineBreak = false)
+	public static TagScope Paragraph(this IndentedTextWriter writer) => TagBlock(writer, "p", false, true);
+	public static TagScope Section(this IndentedTextWriter writer, string? id = null, string? cls = null) => TagBlock(writer, "section", id: id, cls: cls);
+	public static TagScope TagBlock(this IndentedTextWriter writer, string tag, bool suffixLineBreak = false, bool prefixLineBreakBeforeEnd = false, string? id = null, string? cls = null)
 	{
-		writer.WriteLine($"<{tag}>");
+		writer.Write($"<{tag}");
+
+		if (id is not null) writer.Write($" id=\"{id.AttributeEncode()}\"");
+		if (cls is not null) writer.Write($" class=\"{cls.AttributeEncode()}\"");
+
+		writer.WriteLine(">");
 		writer.Indent++;
 
-		return new(writer, tag, true, suffixLineBreak);
+		return new(writer, tag, true, suffixLineBreak, prefixLineBreakBeforeEnd);
 	}
 	#endregion
 
 	#region Tag methods
-	public static TagScope Tag(this IndentedTextWriter writer, string tag, bool appendLineBreak = false)
+	public static TagScope Tag(this IndentedTextWriter writer, string tag, bool appendLineBreak = true)
 	{
 		writer.Write($"<{tag}>");
 		return new(writer, tag, false, appendLineBreak);
@@ -118,6 +176,77 @@ public static class IndentedTextWriterExtensions
 			writer.Write(value.ContentEncode());
 
 		return writer;
+	}
+	#endregion
+
+	#region Text node methods
+	public static IndentedTextWriter Thought(this IndentedTextWriter writer, ThoughtTextNode thought)
+	{
+		using (Tag(writer, "i", false))
+			return TextNodeChildren(writer, thought);
+	}
+	public static IndentedTextWriter Link(this IndentedTextWriter writer, LinkTextNode link)
+	{
+		using (Link(writer, link.Link, link.Title, link.ShouldMultiline()))
+			return TextNodeChildren(writer, link);
+	}
+	public static IndentedTextWriter TextNode(this IndentedTextWriter writer, TextNode node)
+	{
+		if (node is PlainTextNode plain)
+		{
+			writer.Write(plain.Text.ContentEncode());
+			return writer;
+		}
+		else if (node is LinkTextNode link)
+			return Link(writer, link);
+		else if (node is ThoughtTextNode thought)
+			return Thought(writer, thought);
+		else if (node is TextNodeCollection collection)
+			return TextNodeChildren(writer, collection);
+
+		return writer;
+	}
+	public static IndentedTextWriter TextNodeChildren(this IndentedTextWriter writer, TextNodeCollection collection)
+	{
+		TextNode? last = null;
+		foreach (TextNode node in collection.Children)
+		{
+			if (last is PlainTextNode plain && (plain.Text.EndsWith(' ') is false))
+				writer.Write(" ");
+
+			TextNode(writer, node);
+
+			last = node;
+		}
+
+		return writer;
+	}
+	public static TagScope Link(this IndentedTextWriter writer, string link, string? title, bool isBlock)
+	{
+		writer.Write($"<a href=\"{link.AttributeEncode()}\"");
+
+		if (title is not null)
+			writer.Write($" title=\"{title.ContentEncode()}\"");
+
+		if (isBlock)
+		{
+			writer.WriteLine(">");
+			writer.Indent++;
+		}
+		else
+			writer.Write(">");
+
+		return new(writer, "a", isBlock, false);
+	}
+	private static bool ShouldMultiline(this TextNodeCollection collection)
+	{
+		if (collection.Children.Count is not 1)
+			return true;
+
+		if (collection.Children[0] is PlainTextNode text)
+			return text.Text.Length < 20;
+
+		return true;
 	}
 	#endregion
 
