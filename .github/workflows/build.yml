@@ -1,0 +1,53 @@
+name: Website build and deploy
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    paths:
+      - 'content/**' # React to content files changing
+      - 'src/**' # React to the generator changing
+      - '.github/workflows/build.yml' # React to the workflow file itself changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Building the website artifacts
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Install the .NET workflow
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build the generator project
+        run: dotnet build src/Generator
+
+      - name: Run the generator project
+        working-directory: src/Generator/bin/Debug/net9.0
+        run: ./Generator
+
+      - name: Upload the website files as an artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploying the website to Github Pages
+    steps:
+      - name: Deploy
+        uses: actions/deploy-pages@v4
