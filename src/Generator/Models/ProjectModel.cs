@@ -10,7 +10,7 @@ public sealed class ProjectModel : IPageModel
 	public string Title { get; }
 	public string Description { get; }
 	public TextNode Summary { get; }
-	public TextNode Content { get; }
+	public ParagraphTextNodeCollection Content { get; }
 	public IReadOnlyList<SectionNode> Sections { get; }
 	#endregion
 
@@ -27,7 +27,7 @@ public sealed class ProjectModel : IPageModel
 		Description = "A post about Nightowl's project idea to " + summary;
 		Summary = new PlainTextNode("A project to " + summary);
 
-		Content = xml.Parse(".//content");
+		Content = xml.ParseParagraphs(".//content");
 		Sections = xml.SelectNodes(".//article").Select(n => new SectionNode(n));
 	}
 	#endregion

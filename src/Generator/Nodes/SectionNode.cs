@@ -6,7 +6,7 @@ public sealed class SectionNode
 	public string Id { get; }
 	public string Title { get; }
 	public TextNode Summary { get; }
-	public TextNode Content { get; }
+	public ParagraphTextNodeCollection Content { get; }
 	public IReadOnlyList<SubSectionNode> SubSections { get; }
 	#endregion
 
@@ -16,7 +16,7 @@ public sealed class SectionNode
 		Id = node.GetRequiredAttribute("id");
 		Title = node.GetRequiredAttribute("title");
 		Summary = node.Parse(".//summary");
-		Content = node.Parse(".//content");
+		Content = node.ParseParagraphs(".//content");
 
 		SubSections = node.SelectNodes(".//section").Select(n => new SubSectionNode(n));
 	}

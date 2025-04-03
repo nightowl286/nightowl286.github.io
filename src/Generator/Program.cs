@@ -105,7 +105,10 @@ class Program
 				}
 
 				using (writer.LineBreak().Region())
-					writer.Paragraph(model.Content);
+				{
+					foreach (ParagraphTextNode paragraph in model.Content.Paragraphs)
+						writer.Paragraph(paragraph);
+				}
 			}
 
 			writer
@@ -124,7 +127,10 @@ class Program
 					}
 
 					using (writer.Region())
-						writer.Paragraph(section.Content);
+					{
+						foreach (ParagraphTextNode paragraph in section.Content.Paragraphs)
+							writer.Paragraph(paragraph);
+					}
 
 					foreach (SubSectionNode subSection in section.SubSections)
 					{

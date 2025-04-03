@@ -282,7 +282,7 @@ public static class IndentedTextWriterExtensions
 	}
 	public static IndentedTextWriter Link(this IndentedTextWriter writer, LinkTextNode link)
 	{
-		using (Link(writer, link.Link, link.Title, link.ShouldMultiline()))
+		using (writer.Link(link.Link, link.Title, false))
 			return TextNodeChildren(writer, link);
 	}
 	public static IndentedTextWriter Abbreviation(this IndentedTextWriter writer, AbbreviationTextNode abbreviation)
