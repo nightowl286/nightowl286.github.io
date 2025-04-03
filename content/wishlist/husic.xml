@@ -93,7 +93,10 @@
 				playlist / queue repeating.
 
 				I have absolutely no idea how they managed to screw that up. I would honestly love to blame it on
-				the implementation of <link href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random"><code>Math.random()</code></link>
+				the implementation of
+				<link href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random" title="MDN web documentation about Math.random().">
+					<code>Math.random()</code>
+				</link>
 				just to give YouTube at least a little bit of a chance, but it has happened to several different
 				people that I know, even across different browsers.
 
@@ -143,6 +146,54 @@
 			<summary>
 				<thought>(Early optimisation is the root of all evil).</thought>
 			</summary>
-			<content></content>
+			<content>
+				Ah covers... My beloved, and my most hated part of local audio. I love
+				them because they make looking at your music library much nicer to look at,
+				they make it easier to identify your tracks and albums, and over all they're
+				just a very nice visual icing on the cake.
+
+				Now what do I hate about them? Surprisingly nothing, at least nothing I hate
+				about the audio covers themself. It's more about their implementation in
+				the common audio tagging formats, and how the music players treat them.
+			</content>
+			<section id="cover-tagging" title="Cover tagging">
+				So why is tagging audio covers so annoying? Well some tagging formats only
+				allow for text data to be stored, meaning that the audio covers will
+				typically be stored in <link href="https://en.wikipedia.org/wiki/Base64"
+				title="Wikipedia article about base64.">base64</link>, and well, that is clearly
+				not great. It's not the worst it could be, but it's not the best either, especially
+				not when some covers end up being 4k or even bigger. This will typically result in
+				around a 35% increase in the amount of bytes required to store the image
+				<thought>(this number comes from both the Wikipedia article linked earlier, and
+				from a little bit of manually checking it)</thought>.
+
+				It is also possible to have several images for an audio track / album, it's not
+				just the front covers, there's also back covers, side labels, logos, photos of artists
+				/ composers / e.t.c, and so on. Including pictures of brightly colored fish
+				<thought>(I dare you to go down that rabbit hole, and if you ever reach the end,
+				then please let me know - I'm serious, please do let me known)</thought>.
+
+				So now all of that combined together and now each of your audio tracks is several
+				<link href="https://en.wikipedia.org/wiki/Byte#Multiple-byte_units">
+					<abbr title="Mebibytes, or 1024 × 1024 bytes, you know, the much saner scale for memory than scales of 1000.">MiBs</abbr>
+				</link>
+				bigger than it needed to be. Now we do live in an era where a few MiBs of memory
+				won't be a big deal, but for some people their music library contains several hundreds,
+				and sometimes even several thousands of audio tracks <thought>(if not even more)</thought>.
+
+				So at this point, your music library has jumped up by a <abbr title="Gibibyte, or 1024 × 1024 × 1024 bytes.">GiB</abbr>
+				or a few, and you might be thinking "that's not really that much", and you'd be completely
+				right, and I'd fully agree, in this era of computing a GiB or a few really means nothing
+				when it comes to disk space. But here's the kicker, this section is not for complaining
+				about the extra library size, oh no, if it was that simple then I wouldn't even be complaining
+				about cover images in the first place. No, this section is merely a prerequisite, some extra
+				context for the next section where I complain about how music players deal with them.
+
+				However before that, a little bit of interesting information <thought>(and some extra
+				context)</thought>, is that each audio file contains it's own cover images, even if
+				every song in the album will have the exact same images. Now this comes in very handy
+				when a song does in fact have it's own unique cover, such as when a song is released
+				as a single, instead of being a part of an album.
+			</section>
 	</article>
 </project>
