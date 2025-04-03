@@ -15,12 +15,12 @@ public sealed class ProjectModel : IPageModel
 	#endregion
 
 	#region Constructors
-	public ProjectModel(string id, XmlDocument xml)
+	public ProjectModel(string id, XmlDocument xml, DateTime publishedAt, DateTime updatedAt)
 	{
 		Id = id;
 		Name = xml.GetRequiredAttribute("name");
-		Published = xml.GetDateAttribute("published");
-		Updated = xml.GetDateAttribute("updated");
+		Published = publishedAt;
+		Updated = updatedAt;
 		Title = IndexModel.DefaultTitle + $" - {Name} wishlist project";
 
 		string summary = xml.SelectRequiredSingleNode(".//summary").InnerText;

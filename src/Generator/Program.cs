@@ -1,4 +1,6 @@
-﻿namespace Generator;
+﻿using Microsoft.VisualBasic;
+
+namespace Generator;
 
 class Program
 {
@@ -11,8 +13,10 @@ class Program
 	#region Functions
 	public static void Main()
 	{
-		IndexModel indexModel = LoadIndexModel();
-		ProjectModel[] projectModels = LoadWishlistModels().OrderBy(p => p.Id).ToArray();
+		TimeInfo lastUpdateInfo = GetLastUpdateInfo();
+
+		IndexModel indexModel = LoadIndexModel(lastUpdateInfo);
+		ProjectModel[] projectModels = LoadWishlistModels(lastUpdateInfo).OrderBy(p => p.Id).ToArray();
 
 		CleanDirectory(BuildPath);
 		CopyAssets();
@@ -169,6 +173,36 @@ class Program
 	#endregion
 
 	#region Helpers
+	private static TimeInfo GetLastUpdateInfo()
+	{
+		string? path = Repository.Discover(Environment.CurrentDirectory);
+
+		if (path is null)
+			throw new InvalidOperationException("The generator was expected to be inside of a git repository.");
+
+		string? repoDirectory = Path.GetDirectoryName(Path.GetDirectoryName(path));
+
+		Debug.Assert(repoDirectory is not null);
+
+		using Repository repo = new(path);
+
+		TimeInfo info = new();
+		foreach (string file in Directory.GetFiles(ContentPath, "*.xml", SearchOption.AllDirectories))
+		{
+			string relative = Path.GetRelativePath(repoDirectory, file);
+
+			IEnumerable<LogEntry> entries = repo.Commits.QueryBy(relative);
+			LogEntry oldest = entries.Last();
+			LogEntry newest = entries.First();
+
+			DateTimeOffset publishedAt = oldest.Commit.Author.When;
+			DateTimeOffset updatedAt = newest.Commit.Author.When;
+
+			info.Add(file, publishedAt, updatedAt);
+		}
+
+		return info;
+	}
 	private static void CleanDirectory(string directory)
 	{
 		if (Directory.Exists(directory))
@@ -176,7 +210,7 @@ class Program
 
 		Directory.CreateDirectory(directory);
 	}
-	private static ProjectModel[] LoadWishlistModels()
+	private static ProjectModel[] LoadWishlistModels(TimeInfo timeInfo)
 	{
 		string wishlistDirectory = Path.Combine(ContentPath, "wishlist");
 		string[] files = Directory.GetFiles(wishlistDirectory, "*.xml");
@@ -184,21 +218,27 @@ class Program
 		ProjectModel[] projects = new ProjectModel[files.Length];
 		for (int i = 0; i < files.Length; i++)
 		{
-			string id = Path.GetFileNameWithoutExtension(files[i]);
-			XmlDocument xml = LoadXmlDocument(files[i]);
-			ProjectModel project = new(id, xml);
+			string file = files[i];
+
+			string id = Path.GetFileNameWithoutExtension(file);
+			XmlDocument xml = LoadXmlDocument(file);
+
+			timeInfo.Get(file, out DateTime publishedAt, out DateTime updatedAt);
+			ProjectModel project = new(id, xml, publishedAt, updatedAt);
 
 			projects[i] = project;
 		}
 
 		return projects;
 	}
-	private static IndexModel LoadIndexModel()
+	private static IndexModel LoadIndexModel(TimeInfo timeInfo)
 	{
 		string path = Path.Combine(ContentPath, "index.xml");
 
 		XmlDocument xml = LoadXmlDocument(path);
-		IndexModel model = new(xml);
+
+		timeInfo.Get(path, out DateTime publishedAt, out DateTime updatedAt);
+		IndexModel model = new(xml, publishedAt, updatedAt);
 
 		return model;
 	}

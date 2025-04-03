@@ -1,6 +1,6 @@
 namespace Generator.Models;
 
-public sealed class IndexModel(XmlDocument xml) : IPageModel
+public sealed class IndexModel(XmlDocument xml, DateTime publishedAt, DateTime updateAt) : IPageModel
 {
 	#region Constants
 	public const string DefaultTitle = "Nightowl's website";
@@ -8,8 +8,8 @@ public sealed class IndexModel(XmlDocument xml) : IPageModel
 
 	#region Properties
 	public string Id => "index";
-	public DateTime Published { get; } = xml.GetDateAttribute("published");
-	public DateTime Updated { get; } = xml.GetDateAttribute("updated");
+	public DateTime Published { get; } = publishedAt;
+	public DateTime Updated { get; } = updateAt;
 	public string Title => DefaultTitle;
 	public string Description { get; } = xml.GetRequiredAttribute("description");
 	public IReadOnlyList<ProfileLinkNode> ProfileLinks { get; } = xml.SelectNodes(".//profile").Select(n => new ProfileLinkNode(n));

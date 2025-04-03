@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
+	<!-- Project -->
+	<PropertyGroup Label="project">
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>13</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
+
+	<!-- Package references -->
+	<ItemGroup Label="packages">
+	  <PackageReference Include="LibGit2Sharp" Version="0.31.0" />
+	</ItemGroup>
 
 </Project>
