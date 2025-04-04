@@ -1,4 +1,4 @@
-<project name="Husic" published="2025-03-24 18:31:00" updated="2025-04-3 05:13:00">
+<project name="Husic">
 	<summary>create the best offline music player, initially inspired simply because shuffle algorithms suck.</summary>
 	<content>
 			Music players are cool, there's a lot of different ways they can be made, they
@@ -147,10 +147,10 @@
 				<thought>(Early optimisation is the root of all evil).</thought>
 			</summary>
 			<content>
-				Ah covers... My beloved, and my most hated part of local audio. I love
-				them because they make looking at your music library much nicer to look at,
-				they make it easier to identify your tracks and albums, and over all they're
-				just a very nice visual icing on the cake.
+				Ah covers... My beloved, and my most hated part of local audio. I love them
+				because they make your music library much nicer to look at, they make it
+				easier to identify your tracks and albums, and over all they're just a
+				very nice visual icing on the cake.
 
 				Now what do I hate about them? Surprisingly nothing, at least nothing I hate
 				about the audio covers themself. It's more about their implementation in
