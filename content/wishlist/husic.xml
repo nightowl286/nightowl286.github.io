@@ -160,18 +160,18 @@
 				So why is tagging audio covers so annoying? Well some tagging formats only
 				allow for text data to be stored, meaning that the audio covers will
 				typically be stored in <link href="https://en.wikipedia.org/wiki/Base64"
-				title="Wikipedia article about base64.">base64</link>, and well, that is clearly
-				not great. It's not the worst it could be, but it's not the best either, especially
-				not when some covers end up being 4k or even bigger. This will typically result in
-				around a 35% increase in the amount of bytes required to store the image
-				<thought>(this number comes from both the Wikipedia article linked earlier, and
-				from a little bit of manually checking it)</thought>.
+				title="Wikipedia article about base64.">base64</link>.
+				This will usually result in around a 35% increase in the amount of bytes required
+				to store the image <thought>(this number comes from both the Wikipedia article
+				linked earlier, and from a little bit of manual verification)</thought>. And well,
+				that is clearly not great. It's not the worst it could be by all means, but it's
+				not the best either, especially not when some covers end up being 4k or bigger.
 
 				It is also possible to have several images for an audio track / album, it's not
 				just the front covers, there's also back covers, side labels, logos, photos of artists
 				/ composers / e.t.c, and so on. Including pictures of brightly colored fish
 				<thought>(I dare you to go down that rabbit hole, and if you ever reach the end,
-				then please let me know - I'm serious, please do let me known)</thought>.
+				then please let me know - I'm serious, please do let me know)</thought>.
 
 				So now all of that combined together and now each of your audio tracks is several
 				<link href="https://en.wikipedia.org/wiki/Byte#Multiple-byte_units">
