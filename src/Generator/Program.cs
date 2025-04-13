@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Generator;
+﻿namespace Generator;
 
 class Program
 {

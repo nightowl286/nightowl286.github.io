@@ -225,7 +225,7 @@ public static class IndentedTextWriterExtensions
 			return TextNode(writer, node);
 	}
 	public static TagScope Section(this IndentedTextWriter writer, string? id = null, string? cls = null) => TagBlock(writer, "section", id: id, cls: cls);
-	public static TagScope Card(this IndentedTextWriter writer) => TagBlock(writer, "div", cls: "card");
+	public static TagScope Card(this IndentedTextWriter writer) => TagBlock(writer, "header", cls: "card");
 	public static TagScope Region(this IndentedTextWriter writer) => TagBlock(writer, "div", cls: "region");
 	public static IndentedTextWriter Br(this IndentedTextWriter writer)
 	{
