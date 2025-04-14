@@ -1,4 +1,4 @@
-<project name="Transform" published="2025-03-24 19:03:00" updated="2025-03-24 19:03:00">
+<project name="Transform">
    <summary>create a new kind of an IDE, a 'transforming' IDE that is meant to adapt to workflows, instead of being general or specialised for a single language.</summary>
 	<content></content>
 </project>
