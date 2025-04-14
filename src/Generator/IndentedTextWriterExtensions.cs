@@ -185,7 +185,7 @@ public static class IndentedTextWriterExtensions
 		using (writer.Comment("Table of contents").Section("toc", "section"))
 		{
 			using (writer.Card())
-				writer.LinkHeading("h2", "#toc", "Anchor link to this section of the page", "Table of contents");
+				writer.LinkHeading("h2", "toc", "Anchor link to this section of the page", "Table of contents");
 
 			using (writer.Region())
 			using (writer.TagBlock("ol"))
