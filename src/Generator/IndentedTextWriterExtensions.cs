@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Generator;
 
 public readonly ref struct TagScope(IndentedTextWriter writer, string tag, bool isBlock, bool suffixLineBreak, bool prefixLineBreakBeforeEnd = false) : IDisposable
@@ -91,6 +93,8 @@ public static class IndentedTextWriterExtensions
 			string text = stringWriter
 				.ToString()
 				.Replace("\t ", "\t");
+
+			text = Regex.Replace(text, @"\s{2, }", " ");
 
 			writer.Write(text);
 		}
@@ -337,6 +341,9 @@ public static class IndentedTextWriterExtensions
 		foreach (TextNode node in collection.Children)
 		{
 			if (last is PlainTextNode plain && (plain.Text.EndsWith(' ') is false) && (node is not SuperScriptTextNode))
+				writer.Write(" ");
+
+			if ((last is LinkTextNode && node is ThoughtTextNode) || (last is ThoughtTextNode && node is LinkTextNode))
 				writer.Write(" ");
 
 			TextNode(writer, node);
