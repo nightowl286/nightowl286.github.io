@@ -74,9 +74,39 @@
 
 	<article id="general" title="General IDEs">
 		<summary>
-			<thought>(A jumbled up mess).</thought></summary>
+			<thought>(A jumbled up mess).</thought>
+		</summary>
 		<content>
+			In my opinion, general IDEs are a wishful idea, and in a perfect world they might have ended up
+			being the best option. However, from my experience, I never wanted to burn anything to the ground so badly before.
 		</content>
+		<section id="general-the-good" title="The good">
+			In all fairness, the idea behind general IDEs is a solid one: focus on making a good text editor, that can then
+			be easily configured and upgraded with extensions written by the community.
+
+			They can support virtually any language that exists out there, as long as someone is willing to make an extension for it,
+			meaning that you can keep on using the same IDE that you've become used to for developing different things.
+
+			Another good part of general IDEs, is that if you're using an extension for something, and you don't like it,
+			then you can just switch to a different extension, or even make one yourself.
+		</section>
+		<section id="general-and-the-bad" title="And the bad">
+			However, in reality <thought>(at least from my experience)</thought>, what ends up happening is that
+			you get a plethora of lacklustre extensions <thought>(rarely are there any good ones)</thought>, along
+			with an IDE that you have to configure in weird ways that lack polish.
+
+			Along with that, in my experience the extensions don't work together as well as they could, for example spellchecking,
+			with code this can be difficult to get correctly, as there are several places that should be spellchecked, and some places
+			that shouldn't ever be spellchecked, and some where it depends on the context. And typically a good spellchecker will need
+			to have decent integration with whatever programming language you're using, at least so that it can understand the
+			structure of the code file. Because this isn't as simple as "spellcheck all comments", because in some languages
+			<thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously neither
+			the XML tags themselves, nor the attributes should be spellchecked
+			<thought>(here I mean the name of the attribute itself, whether the value should be spellchecked is more contextual)</thought>.
+			Only the content of <em>some</em> elements should be spellchecked.
+		</section>
+		<section id="general-vscode" title="Visual Studio Code">
+		</section>
 	</article>
 
 	<article id="transforming" title="Transforming IDEs?">
