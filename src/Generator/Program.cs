@@ -6,6 +6,7 @@ class Program
 	private static readonly string ContentPath = Path.GetFullPath("../../../../../content");
 	public static readonly string BuildPath = Path.GetFullPath("../../../../../build");
 	public static readonly string InlineCssPath = Path.Combine(ContentPath, "inline.css");
+	private const string PlainDirectoryName = "plain";
 	#endregion
 
 	#region Functions
@@ -19,6 +20,9 @@ class Program
 		CleanDirectory(BuildPath);
 		CopyAssets();
 		BuildIndexPage(indexModel, projectModels);
+
+		if (Directory.Exists(PlainDirectoryName) is false)
+			Directory.CreateDirectory(PlainDirectoryName);
 
 		Array.ForEach(projectModels, BuildProjectPage);
 	}
@@ -97,6 +101,9 @@ class Program
 	{
 		if (model.IsHidden)
 			return;
+
+		string plainPath = Path.Combine(PlainDirectoryName, $"{model.Id}.txt");
+		File.WriteAllText(plainPath, model.PlainText);
 
 		model.PageTemplate(writer =>
 		{

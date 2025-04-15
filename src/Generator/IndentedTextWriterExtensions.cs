@@ -362,6 +362,22 @@ public static class IndentedTextWriterExtensions
 			using (Tag(writer, "sup", false))
 				return TextNodeChildren(writer, super);
 		}
+		else if (node is ListTextNode list)
+		{
+			string type = list.Kind switch
+			{
+				ListKind.Bullet => "ul",
+				ListKind.Number => "ol",
+				_ => throw new InvalidOperationException($"Unknown list kind ({list.Kind}).")
+			};
+			using (Tag(writer, type, true))
+				return TextNodeChildren(writer, list);
+		}
+		else if (node is ListItemTextNode item)
+		{
+			using (Tag(writer, "li", false))
+				return TextNodeChildren(writer, item);
+		}
 		else if (node is TextNodeCollection collection && node.GetType() == typeof(TextNodeCollection)) // Direct class, not as a base.
 			return TextNodeChildren(writer, collection);
 

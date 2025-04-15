@@ -115,3 +115,15 @@ footer > p {
 footer > p:hover {
 	color: #d7d7d7;
 }
+
+/* Lists */
+
+ol, ul {
+	text-align: start;
+	line-height: 1.25em;
+	padding-left: 25px;
+}
+
+li {
+	padding: 3px 0px;
+}

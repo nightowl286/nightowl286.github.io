@@ -72,6 +72,8 @@ public abstract class TextNode
 			"em" => new EmphasisTextNode(children),
 			"sup" => new SuperScriptTextNode(children),
 			"code" => new CodeTextNode(children),
+			"list" => new ListTextNode(element, children),
+			"item" => new ListItemTextNode(children),
 
 			_ => throw new ArgumentException($"Unknown XML element ({element.Name}).", nameof(xml))
 		};
