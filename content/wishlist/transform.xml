@@ -201,6 +201,69 @@
 			<thought>(A new contender enters the arena?)</thought>
 		</summary>
 		<content>
+			So what exactly do I mean by a 'transforming' IDE? Well in my view, it would be a mix between a specialised IDE and a general one,
+			with the main distinction being that it's the IDE that provides the general re-usable functionality and components like: spell checking;
+			middle-ware for customising how the built-in language support works; CI/CD integration; source control; e.t.c.
+
+			Imagine the IDE dutifully keeping those components up to the highest standard and polish, and giving them to you as a mix &amp; match
+			of functionality that you can pick out and customise for the needs of your specific project.
+
+			Where there's no need to have random sub-par extensions just to add mediocre support for very general and expected features.
+			The only extensions being the ones that you can easily create yourself, to tailor the IDE to your own projects.
 		</content>
+
+		<section id="transforming-game-example" title="Game example">
+			Let me paint a picture for you
+			<thought>(or try to at least, I suck at it... why am I even attempting this? Eh whatever, it'll hopefully be good enough)</thought>.
+
+			Imagine opening up your IDE, and seeing a blank slate, no extensions being loaded or being updated in the background,
+			just your IDE starting up real quick. No panels, no status bars, just the simple IDE window asking you if you want to open
+			a previous project, or start a new one.
+
+			Imagine opening up one of your latest projects, a game perhaps <thought>(a game is required for this example, deal with it)</thought>,
+			a game in one of the lesser known engines, or perhaps your own bespoke one
+			<thought>(doubt it, we all know game engine <abbr title="developers">devs</abbr> never actually end up working on the game itself)</thought>.
+
+			Imagine having a texture atlas system in your game, perhaps one where the id of the texture is a mangled version of the texture's path
+			<thought>(I don't actually know how texture atlases work, I'm just making this up as I go along, I definitely should've picked a better example than this, but whatever I'm sticking with it)</thought>,
+
+			Then imagine trying to get the texture from your atlas some place in your code, and getting auto-complete suggestions for the texture atlas ids,
+			but <em>only</em> in the contexts where it actually makes sense, you won't be getting those suggestions in every place that you type something,
+			but only when it's a value that you'd want to use in that context.
+
+			Imagine having real-time validation for any texture ids that you use in your code, telling you when you've accidentally used the wrong one, (or perhaps you've removed
+			a texture and it's id is no longer valid), and getting suggestions for which id you most likely meant to use.
+
+			Imagine renaming a texture, and it's id automatically updating across your code base, or perhaps you've changed the code for generating the texture ids,
+			and then the IDE asks you if you'd like to automatically update all of the texture ids that have been used in your code, to the ones that your new algorithm will generate.
+
+			Imagine having your IDE actually adapt to <em>your</em> project, not just a random template you've found online and had to follow,
+			or through a very general purpose extension that you've installed, that <em>sort of, kinda, generally works</em>, but really you'd like something better.
+
+			Imagine having an IDE that cares about your bespoke project, where you can modify the IDE to your liking,
+			so that all of the tooling is just perfect for your particular needs.
+
+			Imagine customising the IDE to have all of that functionality, and it only taking you a maximum of an hour.
+			And then it just works, and you can easily re-use it across your other projects if you'd like to.
+		</section>
+
+		<section id="transforming-blog-example" title="Blog example">
+			Or as a different example, imagine writing a blog that uses your own custom format or notation, and then having it convert to HTML.
+			<thought>(I'm currently writing in an XML file - for lack for <em>easier</em>easier options - and having that be converted to HTML).</thought>
+
+			Imagine making the IDE aware of your specific format and notation, and having all of the tools to be able to easily make the IDE capable of understanding
+			the entire <link href="https://en.wikipedia.org/wiki/Parse_tree"><abbr title="Concrete syntax tree">CST</abbr></link>
+			<thought>(and that means <em>proper</em> support and tooling, not just having a bunch of hellish regex patterns everywhere)</thought>,
+			making it easy to specify which areas need checking for spelling and grammar <thought>(something I could definitely use right now)</thought>,
+			and which areas should be ignored <thought>(I just love it when general spellcheckers decide to spellcheck my links)</thought>.
+
+			Imagine the IDE also knowing which parts of your format refer to links, and being able to verify whether they still point to actual pages,
+			or if they've turned into dead links.
+
+			Imagine having accurate word counts that are calculated after extracting the actual plain-text of your notation, and ignoring any markup related syntax.
+
+			And that's all on top of being able to verify that you've actually used your own format correctly. It would even be possible
+			for you to have a live preview of what content will be generated at real time without having to run your entire pipeline.
+		</section>
 	</article>
 </project>
