@@ -71,6 +71,9 @@ class Program
 				}
 				foreach (ProjectModel project in projects)
 				{
+					if (project.IsHidden)
+						continue;
+
 					writer.WriteLine();
 
 					using (writer.Comment(project.Name).Section(project.Id, "project"))
@@ -92,6 +95,9 @@ class Program
 	}
 	private static void BuildProjectPage(ProjectModel model)
 	{
+		if (model.IsHidden)
+			return;
+
 		model.PageTemplate(writer =>
 		{
 			using (writer.Comment("Introduction").Section("introduction", "section"))

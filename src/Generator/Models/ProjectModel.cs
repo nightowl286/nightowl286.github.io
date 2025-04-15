@@ -15,6 +15,7 @@ public sealed class ProjectModel : IPageModel
 	public string PlainText { get; }
 	public int WordCount { get; }
 	public TimeSpan ReadTime { get; }
+	public bool IsHidden { get; }
 	#endregion
 
 	#region Constructors
@@ -36,6 +37,8 @@ public sealed class ProjectModel : IPageModel
 		PlainText = PlainTextExtractor.Extract(this);
 		WordCount = PlainTextExtractor.GetWordCount(PlainText);
 		ReadTime = PlainTextExtractor.GetReadTime(WordCount);
+
+		IsHidden = xml.GetAttributeOrDefault("hidden", false);
 	}
 	#endregion
 }

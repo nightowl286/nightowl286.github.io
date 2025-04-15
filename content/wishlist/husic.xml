@@ -1,4 +1,4 @@
-<project name="Husic">
+<project name="Husic" hidden="true">
 	<summary>create the best offline music player, initially inspired simply because shuffle algorithms suck.</summary>
 	<content>
 			Music players are cool, there's a lot of different ways they can be made, they

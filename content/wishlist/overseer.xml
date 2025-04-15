@@ -1,4 +1,4 @@
-<project name="Overseer" published="2025-03-24 19:04:00" updated="2025-03-24 19:04:00">
+<project name="Overseer" published="2025-03-24 19:04:00" updated="2025-03-24 19:04:00" hidden="true">
    <summary>create a local project manager, CI/CD pipeline, basically anything I'd want to help me with managing my projects and automating the tedious and repetitive tasks.</summary>
 	<content></content>
 </project>

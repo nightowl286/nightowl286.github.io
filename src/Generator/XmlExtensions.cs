@@ -132,5 +132,25 @@ public static class XmlExtensions
 
 		return attribute.Value;
 	}
+
+	[return: NotNullIfNotNull(nameof(defaultValue))]
+	public static T? GetAttributeOrDefault<T>(this XmlNode node, string attributeName, T? defaultValue = default)
+		where T : IParsable<T>?
+	{
+		return node.AsElement().GetAttributeOrDefault(attributeName, defaultValue);
+	}
+
+	[return: NotNullIfNotNull(nameof(defaultValue))]
+	public static T? GetAttributeOrDefault<T>(this XmlElement element, string attributeName, T? defaultValue = default)
+			where T : IParsable<T>?
+	{
+		XmlAttribute? attribute = element.GetAttributeNode(attributeName);
+
+		if (attribute is null || string.IsNullOrEmpty(attribute.Value))
+			return defaultValue;
+
+		T value = T.Parse(attribute.Value, null);
+		return value;
+	}
 	#endregion
 }

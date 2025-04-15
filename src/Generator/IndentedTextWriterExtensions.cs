@@ -225,7 +225,12 @@ public static class IndentedTextWriterExtensions
 				using (writer.TagBlock("ol"))
 				{
 					foreach (ProjectModel project in projects)
+					{
+						if (project.IsHidden)
+							continue;
+
 						writer.TableOfContentsItem(project.Id, project.Name);
+					}
 				}
 			}
 		}
