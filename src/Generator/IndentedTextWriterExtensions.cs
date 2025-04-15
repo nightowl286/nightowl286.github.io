@@ -455,7 +455,25 @@ public static class IndentedTextWriterExtensions
 	#endregion
 
 	#region Description methods
-	public static IndentedTextWriter Description(this IndentedTextWriter writer, IPageModel model) => Description(writer, model.Description);
+	public static IndentedTextWriter Description(this IndentedTextWriter writer, IPageModel model)
+	{
+		if (model is ProjectModel project)
+			return Description(writer, project);
+
+		return Description(writer, model.Description);
+	}
+	public static IndentedTextWriter Description(this IndentedTextWriter writer, ProjectModel model)
+	{
+		string description = model.Description;
+
+		Debug.Assert(model.ReadTime.TotalHours < 1);
+		int rounded = (int)Math.Round(model.ReadTime.TotalMinutes, 0, MidpointRounding.AwayFromZero);
+
+		string text = Suffixed(rounded, "minutes", "minute");
+		description += $"\\n\\n~{model.WordCount:n0} words, {text} to read at {PlainTextExtractor.WordCountSpeed} WPM.";
+
+		return Description(writer, description);
+	}
 	public static IndentedTextWriter Description(this IndentedTextWriter writer, string description)
 	{
 		writer

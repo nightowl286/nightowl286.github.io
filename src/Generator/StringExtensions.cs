@@ -10,7 +10,7 @@ public static class StringExtensions
 		if (value.Length <= maxLength)
 			return value;
 
-		value = value[(maxLength - 3)..];
+		value = value[..(maxLength - 3)];
 		value += "...";
 
 		return value;
