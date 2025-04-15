@@ -470,7 +470,7 @@ public static class IndentedTextWriterExtensions
 		int rounded = (int)Math.Round(model.ReadTime.TotalMinutes, 0, MidpointRounding.AwayFromZero);
 
 		string text = Suffixed(rounded, "minutes", "minute");
-		description += $"\\n\\n~{model.WordCount:n0} words, {text} to read at {PlainTextExtractor.WordCountSpeed} WPM.";
+		description += $" ~{model.WordCount:n0} words, {text} to read at {PlainTextExtractor.WordCountSpeed} WPM.";
 
 		return Description(writer, description);
 	}
