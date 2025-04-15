@@ -14,7 +14,62 @@
 			<thought>(A rare heaven).</thought>
 		</summary>
 		<content>
+			Specialised IDEs are great, and when used instead of a general IDE, they make it feel
+			as if your tooling has just took a deep breathe of fresh air and it came back to life.
 		</content>
+		<section id="specialised-the-good" title="The good">
+			Specialised IDEs as the name suggests, are indeed specialised. Typically for a single language.
+			Which means that the development process can end up feeling much much much more polished,
+			streamlined, and exactly what you want for working with that language.
+
+			The entire experience will usually get a big boost, along with having extra tooling that is
+			relevant for working with the language that the IDE is aimed at,
+			<thought>(Such as profiling tools, testing tools, live previews for documents, e.t.c).</thought>
+		</section>
+		<section id="specialised-and-the-bad" title="And the bad">
+			However, specialised IDEs take a lot of time and effort to make, and so a good quality one is
+			unfortunately rare to come by, and somewhat surprisingly, it seems that a lot of more niche languages
+			end up having some sort of a specialised IDE, <thought>(usually a low quality one)</thought>, that was written
+			by either the developers of the language, or by one of the fans, or the community.
+
+			And it's great to see that the thought was there, however usually those IDEs are written by people
+			who haven't ever written an IDE before, who's passion isn't the IDE, but the language that they made,
+			and the IDE is just something they see as a necessity.
+
+			In the end however, the worst part about specialised IDEs is probably that they end up being so
+			different from each other, without offering any sort of coherent design. They also make it hard to switch away
+			from them, or learn a language that they don't support, simply because you're so used to them and
+			learning a new IDE ends up being quite challenging.
+		</section>
+		<section id="specialised-visual-studio" title="Visual Studio">
+			As a C# programmer that used to use <abbr title="A steaming pile of doo doo">Windows</abbr>,
+			my experience with specialised IDEs primarily consists of
+			<abbr title="An IDE that supports several languages, but mainly focuses on good C# experience">Visual Studio</abbr>.
+			And in my experience, <abbr title="Short for Visual Studio">VS</abbr> did quite a good job.
+
+			There were of course times where it absolutely sucked so god damn much
+			<thought>(I'm looking at you VS 2019 - *insert angry man shouting at clouds*)</thought>,
+			however overall I've had much more positive experiences with it than bad ones, everything just worked as it should.
+
+			It's downside however, is that it's Windows only, and Windows sucks
+			<thought>(for several large reasons that have nothing to do with this article)</thought>,
+			so I switched away from it.
+		</section>
+		<section id="specialised-rider" title="JetBrains Rider">
+			If you're in the C# space, then you're going to be recommended to either use
+			<abbr title="Visual Studio">VS</abbr>, or <abbr title="JetBrains Rider">Rider</abbr>.
+			VS being the Windows-only one that has a free community edition along with paid enterprise versions,
+			and Rider being the cross-platform one that, that has paid version and a
+			<thought>(very questionable)</thought> free version.
+
+			My experience with Rider is in fact quite limited, and maybe it has improved since I've tried it out,
+			however my very first experience with it left an incredibly bad impression, it's key binds
+			<thought>(which it said it imported from VS)</thought> didn't work as expected, the auto-hide panel feature
+			that I was incredibly used to in VS just didn't work, there wasn't an easy way to switch between project
+			configurations like there was in VS <thought>(but I'm told that feature was now added)</thought>.
+
+			And overall, I just really didn't like it's UI and UX.
+		</section>
 	</article>
 
 	<article id="general" title="General IDEs">
