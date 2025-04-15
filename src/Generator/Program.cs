@@ -201,7 +201,7 @@ class Program
 		{
 			string relative = Path.GetRelativePath(repoDirectory, file);
 
-			IEnumerable<LogEntry> entries = repo.Commits.QueryBy(relative);
+			IEnumerable<LogEntry> entries = repo.Commits.QueryBy(relative, new CommitFilter { SortBy = CommitSortStrategies.Topological });
 			LogEntry oldest = entries.Last();
 			LogEntry newest = entries.First();
 
