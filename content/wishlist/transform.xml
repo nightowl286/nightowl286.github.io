@@ -265,5 +265,16 @@
 			And that's all on top of being able to verify that you've actually used your own format correctly. It would even be possible
 			for you to have a live preview of what content will be generated at real time without having to run your entire pipeline.
 		</section>
+
+		<section id="transforming-feasibility" title="Feasibility?">
+			This project is currently very theoretical and hypothetical, there is no proper write up anywhere yet, and as such
+			it is subject to change, maybe even dramatically so.
+
+			However initially I only plan to add in the features that I require for my own needs, and only then will I slowly work on
+			adding in extra features that other people might find useful, since this project is definitely going to be a massive undertaking.
+
+			But I'm not in a rush, I want to explore and experiment, and the main purpose of this IDE will be to focus on exploring this
+			new approach <thought>(it's new as far as I know, I haven't heard of anything similar before)</thought>.
+		</section>
 	</article>
 </project>
