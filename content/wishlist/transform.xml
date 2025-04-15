@@ -1,5 +1,5 @@
 <project name="Transform">
-   <summary>create a new kind of an IDE, a 'transforming' IDE that is meant to adapt to workflows, instead of being general or specialised for a single language.</summary>
+   <summary>create a new kind of an IDE, a 'transforming' IDE that is meant to adapt to your workflows and your projects, instead of being general or specialised for a single language.</summary>
 	<content>
 		IDEs are an integral part of programming and development, sure some people say that you don't need them,
 		you could just open up a very primitive text editor, and use a <abbr title="Command-line interface">CLI</abbr>
@@ -15,11 +15,11 @@
 		</summary>
 		<content>
 			Specialised IDEs are great, and when used instead of a general IDE, they make it feel
-			as if your tooling has just took a deep breathe of fresh air and it came back to life.
+			as if your tooling has just took a deep breath of fresh air and it came back to life.
 		</content>
 
 		<section id="specialised-the-good" title="The good">
-			Specialised IDEs as the name suggests, are indeed specialised. Typically for a single language.
+			Specialised IDEs (as the name suggests) are indeed specialised. Typically for a single language.
 			Which means that the development process can end up feeling much much much more polished,
 			streamlined, and exactly what you want for working with that language.
 
@@ -29,18 +29,18 @@
 		</section>
 
 		<section id="specialised-and-the-bad" title="And the bad">
-			However, specialised IDEs take a lot of time and effort to make, and so a good quality one is
-			unfortunately rare to come by, and somewhat surprisingly, it seems that a lot of more niche languages
+			However, specialised IDEs take a lot of time and effort to make, and so good quality ones are
+			unfortunately rare to come by. And somewhat surprisingly, it seems that quite a few of more niche languages
 			end up having some sort of a specialised IDE, <thought>(usually a low quality one)</thought>, that was written
-			by either the developers of the language, or by one of the fans, or the community.
+			by either the developers of the language, by one of the fans, or by the community.
 
 			And it's great to see that the thought was there, however usually those IDEs are written by people
 			who haven't ever written an IDE before, who's passion isn't the IDE, but the language that they made,
 			and the IDE is just something they see as a necessity.
 
 			In the end however, the worst part about specialised IDEs is probably that they end up being so
-			different from each other, without offering any sort of coherent design. They also make it hard to switch away
-			from them, or learn a language that they don't support, simply because you're so used to them and
+			different from each other, without offering any sort of coherent design. This also make it hard to switch away
+			from them, or to learn a language that they don't support, simply because you're so used to them and
 			learning a new IDE ends up being quite challenging.
 		</section>
 
@@ -103,13 +103,14 @@
 
 			Along with that, in my experience the extensions don't work together as well as they could, for example spellchecking,
 			with code this can be difficult to get correctly, as there are several places that should be spellchecked, and some places
-			that shouldn't ever be spellchecked, and some where it depends on the context. And typically a good spellchecker will need
-			to have decent integration with whatever programming language you're using, at least so that it can understand the
-			structure of the code file. Because this isn't as simple as "spellcheck all comments", because in some languages
-			<thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously neither
-			the XML tags themselves, nor the attributes should be spellchecked
+			that shouldn't ever be spellchecked, and some where it depends on the context.
+
+			And typically a good spellchecker will need to have decent integration with whatever programming language you're using, at
+			least so that it can understand the structure of the code file. Because this isn't as simple as "spellcheck all comments",
+			because in some languages <thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously
+			neither the XML tags themselves, nor the attributes should be spellchecked
 			<thought>(here I mean the name of the attribute itself, whether the value should be spellchecked is more contextual)</thought>.
-			Only the content of <em>some</em> elements should be spellchecked.
+			Only the contents of <em>some</em> elements should be spellchecked.
 		</section>
 
 		<section id="general-vscode" title="Visual Studio Code">
@@ -124,9 +125,10 @@
 			for the developers of the C# Dev Kit extension.
 
 			I have many, <em>many</em> gripes with the experience that I've had so far, and some of the bugs and/or missing features that I've
-			encountered have either been ignored for years, or they've been marked as a low priority, when in fact they're quite important if
-			you don't want to be tearing out your hair. And honestly the next part is probably gonna sound like an incoherent rant, because I'm
-			just too fed up with it.
+			encountered have either been ignored for years, or they've been marked as a low priority. <thought>(Polish your software god damn it!!!)</thought>
+
+			When in fact, they're quite important if you don't want to be tearing out your hair. And honestly the next part is probably
+			gonna sound like an incoherent rant, because I'm just too fed up with it.
 
 			<list>
 				<item>Very limited solution explorer:</item>
@@ -137,7 +139,7 @@
 				</list>
 
 				<item>
-					Almost non existent <abbr title="A C# project">.csproj</abbr> file support, had to add a lot of
+					Almost non-existent <abbr title="A C# project">.csproj</abbr> file support, had to add a lot of
 					custom snippets and <em>really</em> configure the spellchecking to make it at least passable.
 				</item>
 				<item>
@@ -145,7 +147,7 @@
 					<abbr title="JetBrains Rider">Rider</abbr> handles this properly, and I'm assuming
 					<abbr title="Visual Studio">VS</abbr> will do as well.
 				</item>
-				<item>No editor support for switching between different multi-targeting contexts, this is <em>EXTREMELY</em> helpful.</item>
+				<item>No editor support for switching between different multi-targeting contexts, this would be <em>EXTREMELY</em> helpful.</item>
 				<item>
 					Switching between build configurations requires restarting extensions
 					<thought>(which also breaks the solution explorer because of a bug, so you gotta restart the entire IDE anyway)</thought>.
@@ -154,7 +156,7 @@
 					Moving to the end of a code fold <thought>(Such as with the <code>End</code> key on your keyboard)</thought> ends up
 					moving the cursor to the end of the function signature, rather than to the end of the implementation. So if you want
 					to add a new line break (and then more code) after the function, you gotta expand it, then move to the end, add the line
-					break, collapse the function again, and only then can you add more code after it.
+					break, <thought>(optionally)</thought> collapse the function again, and only then can you add more code after it.
 				</item>
 				<item>
 					MSBuild likes crashing a lot, obviously this sounds like it's related to MSBuild and not <abbr title="Visual Studio Code">VSCode</abbr>,
@@ -164,7 +166,7 @@
 				</item>
 
 				<item>
-					Testing absolutely sucks <thought>(I use <abbr title="Microsoft's testing framework for .NET">MSTest</abbr> for context)</thought>,
+					Testing absolutely sucks <thought>(for context: I use <abbr title="Microsoft's testing framework for .NET">MSTest</abbr>)</thought>,
 					I don't even have a clue what this blame this on, there's so many things wrong with it:
 				</item>
 				<list>
@@ -178,6 +180,10 @@
 						actually execute <thought>(guessing it's tied to the dynamic tests in some way)</thought>, and sometimes the number will just keep on increasing
 						during the text exploration too <thought>(guessing this one is tied to the weird caching issue)</thought>.
 					</item>
+					<item>
+						If I want to execute the test at the cursor position, then I have to move the cursor to the first line of the test implementation
+						<thought>(the <code>{</code> in my case)</thought>, and then I'll be able to run the test. It doesn't work if I have my cursor on the name of the test function.
+					</item>
 				</list>
 			</list>
 
@@ -185,14 +191,16 @@
 			a year so far, definitely not leaving a good impression. And that's mostly the issues I've had when trying it with C#,
 			not the issue I've had with it in general.
 
-			In my opinion, the settings menu leaves a lot to be desired
+			In my opinion, the settings menu a bit to be desired
 			<thought>(now I don't know whether it's VSCode that's to blame for this, or the developers of the extensions that add in the settings, either way, it's the VSCode experience)</thought>.
-			The settings over all end up being not that bad compared to what I've seen in a lot of other software, however sometimes you're just forced to edit
-			the JSON file manually, which isn't great, particularly because their JSON tooling doesn't even let you format the file nicely, so you're stuck with
+			The settings over all end up being not that bad compared to what I've seen in a lot of other pieces of software,
+			however sometimes you're just forced to edit the JSON settings file manually, which isn't great.
+
+			Particularly because their JSON tooling doesn't even let you format the file nicely, so you're stuck with
 			manually editing a large JSON object without any ability to make it a nicer, more organised experience for yourself.
 
-			I absolutely despise VSCode, and once I make my own IDE then I hope it burns in a trash can and is never seen again
-			<thought>(or at least that I never have to look at it or use it ever again in my entire life)</thought>.
+			Overall I absolutely despise the experience I've had with VSCode, and once I make my own IDE then I hope it burns in a trash can
+			and is never seen again <thought>(or at least that I never have to look at it or use it ever again in my entire life)</thought>.
 		</section>
 	</article>
 
@@ -225,7 +233,8 @@
 			<thought>(doubt it, we all know game engine <abbr title="developers">devs</abbr> never actually end up working on the game itself)</thought>.
 
 			Imagine having a texture atlas system in your game, perhaps one where the id of the texture is a mangled version of the texture's path
-			<thought>(I don't actually know how texture atlases work, I'm just making this up as I go along, I definitely should've picked a better example than this, but whatever I'm sticking with it)</thought>,
+			<thought>(I don't actually know how texture atlases work, I'm just making this up as I go along,
+			I definitely should've picked a better example than this, but whatever I'm sticking with it)</thought>.
 
 			Then imagine trying to get the texture from your atlas some place in your code, and getting auto-complete suggestions for the texture atlas ids,
 			but <em>only</em> in the contexts where it actually makes sense, you won't be getting those suggestions in every place that you type something,
@@ -248,8 +257,8 @@
 		</section>
 
 		<section id="transforming-blog-example" title="Blog example">
-			Or as a different example, imagine writing a blog that uses your own custom format or notation, and then having it convert to HTML.
-			<thought>(I'm currently writing in an XML file - for lack for <em>easier</em>easier options - and having that be converted to HTML).</thought>
+			Or as a different example, imagine writing a blog that uses your own custom format or notation, and then converting it to HTML.
+			<thought>(I'm currently writing in an XML file - for lack of <em>easier</em> options - and having that be converted to HTML).</thought>
 
 			Imagine making the IDE aware of your specific format and notation, and having all of the tools to be able to easily make the IDE capable of understanding
 			the entire <link href="https://en.wikipedia.org/wiki/Parse_tree"><abbr title="Concrete syntax tree">CST</abbr></link>
@@ -274,7 +283,8 @@
 			adding in extra features that other people might find useful, since this project is definitely going to be a massive undertaking.
 
 			But I'm not in a rush, I want to explore and experiment, and the main purpose of this IDE will be to focus on exploring this
-			new approach <thought>(it's new as far as I know, I haven't heard of anything similar before)</thought>.
+			new approach <thought>(it's new as far as I know, I haven't heard of anything similar before)</thought>, rather than just
+			trying out the same old established approaches.
 		</section>
 	</article>
 </project>

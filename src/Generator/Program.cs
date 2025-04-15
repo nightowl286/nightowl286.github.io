@@ -120,7 +120,7 @@ class Program
 					using (writer.Paragraph())
 					{
 						writer
-							.Text($"{model.WordCount:n0} words.").Br()
+							.Text($"~{model.WordCount:n0} words.").Br()
 							.Duration(model.ReadTime).LineBreak()
 							.Text($" to read at {PlainTextExtractor.WordCountSpeed} ")
 							.Text($"<abbr title=\"Words per minute\">WPM</abbr>.");
