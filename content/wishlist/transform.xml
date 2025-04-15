@@ -286,5 +286,28 @@
 			new approach <thought>(it's new as far as I know, I haven't heard of anything similar before)</thought>, rather than just
 			trying out the same old established approaches.
 		</section>
+
+		<section id="transforming-specialised-comparison" title="Comparison to a specialised IDE">
+			The hope is that the transforming IDE will be capable of resembling a specialised IDE, but for
+			several different languages, rather than just one.
+
+			A specialised IDE is also typically focused on the language itself, and the tooling around it, whereas the
+			transforming IDE will focus more on how you're using the language(s), and what your development process looks like.
+		</section>
+
+		<section id="transforming-general-comparison" title="Comparison to a general IDE">
+			Both IDEs follow the idea of being able to have an IDE that can be configured and extended, however the main
+			difference lies in the responsibilities.
+
+			General IDEs tend to focus on providing the primary text editor features, and leaving everything else up
+			to the extensions, which the user then has to find, install and then configure them
+			<thought>(assuming an extension that they need even exists)</thought>.
+
+			The transforming IDE will focus on providing all of the general functionality that is typically expected in
+			feature full IDEs, along with making it incredibly easy to configure it and provide a lot of tooling to help
+			create custom extensions.
+
+			The user then is offered a plethora of polished components that they can pick and choose to use, depending on what their current project needs.
+		</section>
 	</article>
 </project>
