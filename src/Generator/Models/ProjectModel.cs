@@ -12,6 +12,8 @@ public sealed class ProjectModel : IPageModel
 	public TextNode Summary { get; }
 	public ParagraphTextNodeCollection Content { get; }
 	public IReadOnlyList<SectionNode> Sections { get; }
+	public string PlainText { get; }
+	public int WordCount { get; }
 	#endregion
 
 	#region Constructors
@@ -29,6 +31,8 @@ public sealed class ProjectModel : IPageModel
 
 		Content = xml.ParseParagraphs(".//content");
 		Sections = xml.SelectNodes(".//article").Select(n => new SectionNode(n));
+		PlainText = PlainTextExtractor.Extract(this);
+		WordCount = PlainTextExtractor.GetWordCount(PlainText);
 	}
 	#endregion
 }
