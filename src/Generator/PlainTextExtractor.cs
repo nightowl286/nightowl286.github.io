@@ -4,6 +4,10 @@ namespace Generator;
 
 public static partial class PlainTextExtractor
 {
+	#region Constants
+	public const int WordCountSpeed = 250;
+	#endregion
+
 	#region Functions
 	public static string Extract(ProjectModel model)
 	{
@@ -34,6 +38,11 @@ public static partial class PlainTextExtractor
 	{
 		int count = WordRegex().Count(text);
 		return count;
+	}
+	public static TimeSpan GetReadTime(int wordCount)
+	{
+		double minutes = (double)wordCount / WordCountSpeed;
+		return TimeSpan.FromMinutes(minutes);
 	}
 	#endregion
 

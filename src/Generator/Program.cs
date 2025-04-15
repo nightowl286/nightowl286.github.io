@@ -102,8 +102,20 @@ class Program
 						.LinkHeading("h1", "introduction", "Anchor link to this section of the page", model.Name)
 						.Br()
 						.Paragraph(model.Summary)
-						.Br()
-						.Link("../index.html", "Return to the home page", false, "Return to the home page.");
+						.Br();
+
+					using (writer.Paragraph())
+					{
+						writer
+							.Text($"{model.WordCount:n0} words.").Br()
+							.Duration(model.ReadTime).LineBreak()
+							.Text($" to read at {PlainTextExtractor.WordCountSpeed} ")
+							.Text($"<abbr title=\"Words per minute\">WPM</abbr>.");
+					}
+
+					writer
+					.Br()
+					.Link("../index.html", "Return to the home page", false, "Return to the home page.");
 				}
 
 				using (writer.LineBreak().Region())

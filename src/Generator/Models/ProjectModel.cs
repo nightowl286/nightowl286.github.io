@@ -14,6 +14,7 @@ public sealed class ProjectModel : IPageModel
 	public IReadOnlyList<SectionNode> Sections { get; }
 	public string PlainText { get; }
 	public int WordCount { get; }
+	public TimeSpan ReadTime { get; }
 	#endregion
 
 	#region Constructors
@@ -31,8 +32,10 @@ public sealed class ProjectModel : IPageModel
 
 		Content = xml.ParseParagraphs(".//content");
 		Sections = xml.SelectNodes(".//article").Select(n => new SectionNode(n));
+
 		PlainText = PlainTextExtractor.Extract(this);
 		WordCount = PlainTextExtractor.GetWordCount(PlainText);
+		ReadTime = PlainTextExtractor.GetReadTime(WordCount);
 	}
 	#endregion
 }

@@ -108,6 +108,33 @@ public static class IndentedTextWriterExtensions
 
 		return writer;
 	}
+	public static IndentedTextWriter Duration(this IndentedTextWriter writer, TimeSpan duration)
+	{
+		if (duration.TotalHours >= 1)
+			throw new Exception($"What the hell did I just write.");
+
+		string shortSeconds = $"{duration.Seconds}s";
+
+		string longMinutes = Suffixed(duration.Minutes, "minutes", "minute");
+		string longSeconds = Suffixed(duration.Seconds, "seconds", "second");
+
+		string value = string.Join(' ', duration.Minutes > 0 ? [$"{duration.Minutes}m", shortSeconds] : [shortSeconds]);
+		string title = string.Join(' ', duration.Minutes > 0 ? [longMinutes, longSeconds] : [longSeconds]);
+
+		int rounded = (int)Math.Round(duration.TotalMinutes, 0, MidpointRounding.AwayFromZero);
+		string text = Suffixed(rounded, "minutes", "minute");
+
+		writer.Write($"<time datetime=\"{value.AttributeEncode()}\" title=\"{title.AttributeEncode()}\">{text.ContentEncode()}</time>");
+
+		return writer;
+	}
+	private static string Suffixed(int value, string plural, string singular)
+	{
+		if (value is 1)
+			return $"{value} {singular}";
+
+		return $"{value} {plural}";
+	}
 	public static IndentedTextWriter WriteDocType(this IndentedTextWriter writer)
 	{
 		writer.WriteLine("<!DOCTYPE html>");
