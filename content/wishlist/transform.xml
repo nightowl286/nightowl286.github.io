@@ -8,4 +8,27 @@
 		used a proper specialised <abbr title="Integrated development environment">IDE</abbr> that made it a pleasure
 		to program.
 	</content>
+
+	<article id="specialised" title="Specialised IDEs">
+		<summary>
+			<thought>(A rare heaven).</thought>
+		</summary>
+		<content>
+		</content>
+	</article>
+
+	<article id="general" title="General IDEs">
+		<summary>
+			<thought>(A jumbled up mess).</thought></summary>
+		<content>
+		</content>
+	</article>
+
+	<article id="transforming" title="Transforming IDEs?">
+		<summary>
+			<thought>(A new contender enters the arena?)</thought>
+		</summary>
+		<content>
+		</content>
+	</article>
 </project>
