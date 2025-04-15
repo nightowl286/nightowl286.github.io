@@ -99,11 +99,11 @@ class Program
 	}
 	private static void BuildProjectPage(ProjectModel model)
 	{
-		if (model.IsHidden)
-			return;
-
 		string plainPath = Path.Combine(PlainDirectoryName, $"{model.Id}.txt");
 		File.WriteAllText(plainPath, model.PlainText);
+
+		if (model.IsHidden)
+			return;
 
 		model.PageTemplate(writer =>
 		{
