@@ -270,9 +270,13 @@ public static class IndentedTextWriterExtensions
 	}
 	public static IndentedTextWriter LinkHeading(this IndentedTextWriter writer, string tag, string id, string? title, string heading)
 	{
-		using (Tag(writer, tag))
-		using (Link(writer, $"#{id}", title, false))
-			writer.Write(heading.ContentEncode());
+		using (TagBlock(writer, tag))
+		{
+			writer
+				.Link($"#{id}", title, false, "#").LineBreak()
+				.Text(heading.ContentEncode()).LineBreak()
+				.Link($"#toc", "Return to table of contents", false, "↰").LineBreak();
+		}
 
 		return writer;
 	}

@@ -94,7 +94,7 @@ h1, h2, h3 {
 	margin: 0;
 }
 
-.sub-section, .project > h3 {
+.sub-section, .project h3 {
 	text-decoration: none;
 	text-align: center;
 }

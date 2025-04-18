@@ -35,7 +35,7 @@ class Program
 				using (writer.Card())
 				{
 					writer
-						.LinkHeading("h1", "about-me", "Anchor to this section of the page", "About me")
+						.LinkHeading("h1", "about-me", "Anchor link to this section of the page", "About me")
 						.Line("<img src=\"resources/pfp.png\" alt=\"Profile picture for Nightowl286\" title=\"Profile picture for Nightowl286\" style=\"grid-column: 1;\">")
 						.Line("<img src=\"resources/pfp.png\" alt=\"Profile picture for Nightowl286\" title=\"Profile picture for Nightowl286\" style=\"grid-column: 3; transform: scaleX(-1);\">");
 
@@ -69,7 +69,7 @@ class Program
 			{
 				using (writer.Card())
 				{
-					writer.LinkHeading("h2", "wishlist", "Anchor to this section of the page", "Wishlist");
+					writer.LinkHeading("h2", "wishlist", "Anchor link to this section of the page", "Wishlist");
 					using (writer.Paragraph())
 						writer.TextNode(model.Wishlist);
 				}
@@ -82,16 +82,19 @@ class Program
 
 					using (writer.Comment(project.Name).Section(project.Id, "project"))
 					{
-						writer.LinkHeading("h3", project.Id, "Anchor link to this project summary", project.Name);
+						using (writer.TagBlock("h3", id: project.Id))
+						{
+							writer.Link($"#{project.Id}", "Anchor link to this section of the page", false, "#").LineBreak();
+
+							using (writer.Link($"wishlist/{project.Id}.html", $"Read more about the {project.Name} project", true))
+								writer.Text(project.Name).WriteLine();
+
+							writer.Link($"#toc", "Return to table of contents", false, "↰").LineBreak();
+						}
 
 						using (writer.Region())
 						using (writer.Paragraph())
-						{
-							writer
-								.TextNode(project.Summary)
-								.Space()
-								.Link($"wishlist/{project.Id}.html", $"Read more about the {project.Name} project", false, "Read more.");
-						}
+							writer.TextNode(project.Summary);
 					}
 				}
 			}

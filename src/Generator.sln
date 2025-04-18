@@ -11,6 +11,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{C841F5C2-8
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{B489D86D-A092-F0FF-8364-791CEC263EE7}"
+	ProjectSection(SolutionItems) = preProject
+		..\content\index.xml = ..\content\index.xml
+		..\content\style.css = ..\content\style.css
+		..\content\index.css = ..\content\index.css
+		..\content\inline.css = ..\content\inline.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wishlist", "wishlist", "{A33BE39E-C5E8-B01D-2CED-7018AF93D844}"
+	ProjectSection(SolutionItems) = preProject
+		..\content\wishlist\transform.xml = ..\content\wishlist\transform.xml
+		..\content\wishlist\overseer.xml = ..\content\wishlist\overseer.xml
+		..\content\wishlist\husic.xml = ..\content\wishlist\husic.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +39,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A33BE39E-C5E8-B01D-2CED-7018AF93D844} = {B489D86D-A092-F0FF-8364-791CEC263EE7}
 	EndGlobalSection
 EndGlobal
