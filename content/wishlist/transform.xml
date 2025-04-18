@@ -87,13 +87,16 @@
 
 		<section id="general-the-good" title="The good">
 			In all fairness, the idea behind general IDEs is a solid one: focus on making a good text editor, that can then
-			be easily configured and upgraded with extensions written by the community.
+			be easily configured and upgraded with extensions written by the community. There are usually several different
+			types of extensions in this case, primarily either ones that add support for new languages,
+			or ones that modify the IDE itself in some way.
 
-			They can support virtually any language that exists out there, as long as someone is willing to make an extension for it,
-			meaning that you can keep on using the same IDE that you've become used to for developing different things.
+			This means that they can support virtually any language that exists out there, as long as
+			someone is willing to make an extension for it, therefore you can keep on using the same
+			IDE that you've become used to for developing different things.
 
-			Another good part of general IDEs, is that if you're using an extension for something, and you don't like it,
-			then you can just switch to a different extension, or even make one yourself.
+			Another good part of general IDEs, is that if you're using an extension for something, and you don't like it, then
+			you can generally just switch to a different extension, or even make one yourself if you need a more custom solution.
 		</section>
 
 		<section id="general-and-the-bad" title="And the bad">
@@ -107,7 +110,7 @@
 
 			And typically a good spellchecker will need to have decent integration with whatever programming language you're using, at
 			least so that it can understand the structure of the code file. Because this isn't as simple as "spellcheck all comments",
-			because in some languages <thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously
+			since in some languages <thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously
 			neither the XML tags themselves, nor the attributes should be spellchecked
 			<thought>(here I mean the name of the attribute itself, whether the value should be spellchecked is more contextual)</thought>.
 			Only the contents of <em>some</em> elements should be spellchecked.
@@ -210,14 +213,16 @@
 		</summary>
 		<content>
 			So what exactly do I mean by a 'transforming' IDE? Well in my view, it would be a mix between a specialised IDE and a general one,
-			with the main distinction being that it's the IDE that provides the general re-usable functionality and components like: spell checking;
-			middle-ware for customising how the built-in language support works; CI/CD integration; source control; e.t.c.
+			with the main distinction being that it's the IDE that provides <em>all</em> of the general re-usable functionality
+			<thought>(as opposed to just providing the functionality necessary for a text editor, which is what general IDEs commonly do)</thought>
+			and components like: spell checking; middle-ware for customising how the built-in language support works; CI/CD integration; source control; e.t.c.
 
 			Imagine the IDE dutifully keeping those components up to the highest standard and polish, and giving them to you as a mix &amp; match
 			of functionality that you can pick out and customise for the needs of your specific project.
 
 			Where there's no need to have random sub-par extensions just to add mediocre support for very general and expected features.
-			The only extensions being the ones that you can easily create yourself, to tailor the IDE to your own projects.
+			The only extensions being the ones that you can easily create yourself, to further tailor the IDE to your own projects
+			<thought>(such as if you need to add in support for a bespoke language, or a new workflow)</thought>.
 		</content>
 
 		<section id="transforming-game-example" title="Game example">
@@ -303,11 +308,12 @@
 			to the extensions, which the user then has to find, install and then configure them
 			<thought>(assuming an extension that they need even exists)</thought>.
 
-			The transforming IDE will focus on providing all of the general functionality that is typically expected in
-			feature full IDEs, along with making it incredibly easy to configure it and provide a lot of tooling to help
-			create custom extensions.
+			The transforming IDE will focus on providing all of the general functionality that is typically expected in feature full IDEs
+			<thought>(this means things like spell checking, source control, e.t.c on top of the functionality needed for a good text editor)</thought>,
+			along with making it incredibly easy to configure them, and provide a lot of tooling to help create custom extensions
+			<thought>(in cases where you want to add in support for a bespoke language, or if for example you want to customise the auto-complete suggestions)</thought>.
 
-			The user then is offered a plethora of polished components that they can pick and choose to use, depending on what their current project needs.
+			The user then is offered a plethora of polished components and workflows that they can pick and choose to use, depending on what their current project needs.
 		</section>
 	</article>
 </project>
