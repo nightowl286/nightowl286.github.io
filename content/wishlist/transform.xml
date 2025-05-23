@@ -104,16 +104,16 @@
 			you get a plethora of lacklustre extensions <thought>(rarely are there any good ones)</thought>, along
 			with an IDE that you have to configure in weird ways that lack polish.
 
-			Along with that, in my experience the extensions don't work together as well as they could, for example spellchecking,
-			with code this can be difficult to get correctly, as there are several places that should be spellchecked, and some places
-			that shouldn't ever be spellchecked, and some where it depends on the context.
+			Along with that, in my experience the extensions don't work together as well as they could, for example spell checking,
+			with code this can be difficult to get correctly, as there are several places that should be spell checked, and some places
+			that shouldn't ever be spell checked, and some where it depends on the context.
 
-			And typically a good spellchecker will need to have decent integration with whatever programming language you're using, at
-			least so that it can understand the structure of the code file. Because this isn't as simple as "spellcheck all comments",
+			And typically a good spell checker will need to have decent integration with whatever programming language you're using, at
+			least so that it can understand the structure of the code file. Because this isn't as simple as "spell check all comments",
 			since in some languages <thought>(such as in C#)</thought>, you have documentation comments that use XML markup, and obviously
-			neither the XML tags themselves, nor the attributes should be spellchecked
-			<thought>(here I mean the name of the attribute itself, whether the value should be spellchecked is more contextual)</thought>.
-			Only the contents of <em>some</em> elements should be spellchecked.
+			neither the XML tags themselves, nor the attributes should be spell checked
+			<thought>(here I mean the name of the attribute itself, whether the value should be spell checked is more contextual)</thought>.
+			Only the contents of <em>some</em> elements should be spell checked.
 		</section>
 
 		<section id="general-vscode" title="Visual Studio Code">
@@ -143,7 +143,7 @@
 
 				<item>
 					Almost non-existent <abbr title="A C# project">.csproj</abbr> file support, had to add a lot of
-					custom snippets and <em>really</em> configure the spellchecking to make it at least passable.
+					custom snippets and <em>really</em> configure the spell checking to make it at least passable.
 				</item>
 				<item>
 					Can't handle properly debugging local builds when using the <code>DeterministicSourcePaths</code> property.
@@ -194,7 +194,7 @@
 			a year so far, definitely not leaving a good impression. And that's mostly the issues I've had when trying it with C#,
 			not the issue I've had with it in general.
 
-			In my opinion, the settings menu a bit to be desired
+			In my opinion, the settings menu leaves a bit to be desired
 			<thought>(now I don't know whether it's VSCode that's to blame for this, or the developers of the extensions that add in the settings, either way, it's the VSCode experience)</thought>.
 			The settings over all end up being not that bad compared to what I've seen in a lot of other pieces of software,
 			however sometimes you're just forced to edit the JSON settings file manually, which isn't great.
@@ -269,7 +269,7 @@
 			the entire <link href="https://en.wikipedia.org/wiki/Parse_tree"><abbr title="Concrete syntax tree">CST</abbr></link>
 			<thought>(and that means <em>proper</em> support and tooling, not just having a bunch of hellish regex patterns everywhere)</thought>,
 			making it easy to specify which areas need checking for spelling and grammar <thought>(something I could definitely use right now)</thought>,
-			and which areas should be ignored <thought>(I just love it when general spellcheckers decide to spellcheck my links)</thought>.
+			and which areas should be ignored <thought>(I just love it when general spell checkers decide to spell check my links)</thought>.
 
 			Imagine the IDE also knowing which parts of your format refer to links, and being able to verify whether they still point to actual pages,
 			or if they've turned into dead links.
